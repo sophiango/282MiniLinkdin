@@ -8,7 +8,18 @@ var routes = require('./routes/index');
 var company = require('./routes/company');
 var user = require('./routes/user');
 var expressLayouts = require('express-ejs-layouts');
+var mongoose = require('mongoose');
 var app = express();
+
+//mongoose.connect('mongodb://54.67.121.165:27017/minilinkedin');
+mongoose.connect('mongodb://localhost/minilinkedin');
+//mongoose.connection.on('open', function() {
+    //console.log(mongoose.connection.collection);
+    //mongoose.connection.db.collectionNames(function (err, names) {
+    //    console.log(names);
+    //    //mongoose.disconnect();
+    //});
+//});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
