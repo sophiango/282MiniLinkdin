@@ -1,0 +1,26 @@
+<%- contentFor('body')%>
+
+   <h1> stores </h1>
+   
+   <hr>
+   
+  <ul> 
+    <% if( products.length > 1) { %>
+  <table>
+  <tr style="height:400px">
+       <% for(var i=0; i<products.length; i++) { %>
+        <td style="width:300px">
+         <li> <a href='/company/<%=products[i].item%>'> <%=products[i].item%></a></li>
+         <img src='<%=products[i].ImageName%>' alt="<%=products[i].item%>" height="200px" width="200px"> 
+        </td>
+       <% } %>
+
+  </tr>
+  </table>
+    <% } else { %> 
+  <li> <a href='/company/<%=products[0].item%>'> <%=products[0].item%></a></li>
+  <img src='<%=products[0].ImageName%>' alt="<%=products[0].item%>" height="400px" width="400px"> 
+ <% } %>
+</ul>
+
+		

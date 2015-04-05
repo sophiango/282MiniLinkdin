@@ -6,7 +6,7 @@ var Job = require('../models/job');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-    res.send('respond with a resource');
+    //res.render('index', { title: 'Express' })
 });
 
 router.post('/',function(req,res){

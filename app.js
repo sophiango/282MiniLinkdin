@@ -14,16 +14,16 @@ var app = express();
 //mongoose.connect('mongodb://54.67.121.165:27017/minilinkedin');
 mongoose.connect('mongodb://localhost/minilinkedin');
 //mongoose.connection.on('open', function() {
-    //console.log(mongoose.connection.collection);
-    //mongoose.connection.db.collectionNames(function (err, names) {
-    //    console.log(names);
-    //    //mongoose.disconnect();
-    //});
+//console.log(mongoose.connection.collection);
+//mongoose.connection.db.collectionNames(function (err, names) {
+//    console.log(names);
+//    //mongoose.disconnect();
+//});
 //});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -39,9 +39,7 @@ app.use('/user', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    res.render('404');
 });
 
 // error handlers
@@ -49,23 +47,17 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('500', { error: err.message });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+    res.status(err.status || 500);
+    res.render('500', {error: err.message});
 });
 
 
