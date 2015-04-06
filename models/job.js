@@ -5,6 +5,7 @@ var jobSchema = new mongoose.Schema({
         companyId: String,
         position: String,
         company: String,
+        location: String,
         description: String,
         createAt: {type: Date, expires: '1d', default: Date.now}
 });

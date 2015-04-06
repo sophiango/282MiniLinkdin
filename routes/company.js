@@ -41,7 +41,13 @@ router.get('/:comp_id', function (req, res) {
                 title: 'Mini Linkedin',
                 company_name: foundCompany.name,
                 company_logo: foundCompany.imageUrl,
-                subLine: foundCompany.subLine
+                subLine: foundCompany.subLine,
+                company_logo_1: foundCompany.imageUrl,
+                position_1: foundCompany.imageUrl,
+                location_1: foundCompany.imageUrl,
+                company_1: foundCompany.imageUrl,
+                create_at_1: foundCompany.imageUrl,
+                description_1: foundCompany.imageUrl
             })
             //res.status(200).send('Successfully get a company ' + comp_id);
         }
@@ -88,6 +94,7 @@ router.post('/:comp_id/job', function (req, res) {
     var jobId = chance.natural({min: 1, max: 10000}).toString();
     var position = req.body.position;
     var description = req.body.description;
+    var location = req.body.location;
     Company.findOne({companyId:comp_id},function(err,foundCompany){
         if (err) console.log(err);
         else {
@@ -95,16 +102,27 @@ router.post('/:comp_id/job', function (req, res) {
             var newJob = new Job ({
                 jobId : jobId,
                 companyId : comp_id,
-                position : position,
                 company : company_name,
+                position : position,
+                location: location,
                 description : description
                 //createdAt : Date.now()
             })
-            newJob.save(function (err, data) {
+            newJob.save(function (err) {
                 if (err) console.log(err);
                 else {
-                    console.log('Saved : ' + data );
-                    res.status(201).send('Successfully created a job');
+                    Company.update({companyId:comp_id},
+                        {$push: {"jobs": {
+                            jobId : jobId,
+                            position : position,
+                            description : description,
+                            location: location
+                        }}},
+                        function(err) {
+                            console.log(err);
+                            res.status(201).send('Successfully created a job');
+                        }
+                    );
                 }
             });
         }
