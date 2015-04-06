@@ -33,11 +33,17 @@ router.get('/:comp_id', function (req, res) {
     if (comp_id < 0) {
         res.status(404).send('Invalid company id');
     }
-    Company.findOne({companyId:comp_id},function(err,data){
+    Company.findOne({companyId:comp_id},function(err,foundCompany){
         if (err) console.log(err);
         else {
-            console.log('Found company: ' + data.name );
-            res.status(200).send('Successfully get a company ' + comp_id);
+            console.log('Found company: ' + foundCompany.name );
+            res.render('company',{
+                title: 'Mini Linkedin',
+                company_name: foundCompany.name,
+                company_logo: foundCompany.imageUrl,
+                subLine: foundCompany.subLine
+            })
+            //res.status(200).send('Successfully get a company ' + comp_id);
         }
     })
 });
