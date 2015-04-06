@@ -36,18 +36,17 @@ router.get('/:comp_id', function (req, res) {
     Company.findOne({companyId:comp_id},function(err,foundCompany){
         if (err) console.log(err);
         else {
-            console.log('Found company: ' + foundCompany.name );
             res.render('company',{
                 title: 'Mini Linkedin',
                 company_name: foundCompany.name,
                 company_logo: foundCompany.imageUrl,
                 subLine: foundCompany.subLine,
                 company_logo_1: foundCompany.imageUrl,
-                position_1: foundCompany.imageUrl,
-                location_1: foundCompany.imageUrl,
-                company_1: foundCompany.imageUrl,
-                create_at_1: foundCompany.imageUrl,
-                description_1: foundCompany.imageUrl
+                position_1: foundCompany.jobs[0].position,
+                location_1: foundCompany.jobs[0].location,
+                company_1: foundCompany.name,
+                create_at_1: foundCompany.jobs[0].createAt,
+                description_1: foundCompany.jobs[0].description
             })
             //res.status(200).send('Successfully get a company ' + comp_id);
         }
