@@ -2,7 +2,7 @@
 <html lang="en">
 <% include header %>
 <body>
-	<% include navbar %>
+	<% include index_navbar %>
     <div class="container">
         <div class="header clearfix">
             <nav>
@@ -16,9 +16,14 @@
         </div>
 
         <div class="jumbotron">
-            <h1><%=custom_header%></h1>
+            <h2><%=custom_header%></h2>
             <p class="lead"><%=intro_about_page%></p>
+            <form class="form-inline">
             <a data-toggle="modal" href="#myModal" class="btn btn-primary">Sign up today</a>
+            <h4> OR Search for job </h4>
+            <a class="btn btn-primary">Search</a>
+            <input type="text" class="form-control" id="search_parameter" placeholder="Job title or Company">
+            </form>
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog">
                     <div class="modal-content">

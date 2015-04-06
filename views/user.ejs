@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<body>
+<% include profile_navbar %>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">About</a></li>
+                <li role="presentation"><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Project name</h3>
+    </div>
+    <div id="user_profile">
+    <center>
+    <img src=<%=image_url%> alt="profile_pic" class="img-circle">
+    <h2><%=name%></h2>
+    <em><%=headline%></em>
+    </br>
+    <span><strong>Skills: </strong></span>
+    <span class="label label-info"><%=skill_1%></span>
+    <span class="label label-info"><%=skill_2%></span>
+    <span class="label label-info"><%=skill_3%></span>
+    <span class="label label-success"><%=skill_4%></span>
+    <span class="label label-success"><%=skill_5%></span>
+    </center>
+    </div>
+
+    <hr>
+
+    <div class="row" id="experience">
+        <h2>Experience</h2>
+        <div>
+            <div class="col-md-8">
+                <h3><%=position%></h3>
+                <h4><%=company_name%></h4>
+                <h5><%=position_time_range%></h5>
+            </div>
+            <div class="col-md-4">
+                <img src=<%=company_logo%> alt="company_logo" class="img-thumbnail">
+            </div>
+            <div class="col-md-12">
+            <p><%=job_description%></p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row" id="education">
+        <h2>Education</h2>
+        <div class="col-md-8">
+            <h3><%=institution%></h3>
+            <h4><%=degree%></h4>
+            <h5><%=school_time_range%></h5>
+        </div>
+        <!--<div class="col-md-4">-->
+            <!--<img src="https://media.licdn.com/media/p/2/005/074/2aa/1c3bae2.png" alt="company_logo" class="img-thumbnail">-->
+        <!--</div>-->
+    </div>
+
+</div> <!--container!-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#home').addClass("active");
+    });
+</script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

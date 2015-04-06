@@ -15,16 +15,23 @@ var experienceSchema = new mongoose.Schema({
     description: String
 },{ _id : false });
 
+var statusSchema = new mongoose.Schema({
+    content: String,
+    createAt: {type: Date, default: Date.now}
+})
+
 var userSchema = new mongoose.Schema({
     userId : String,
-    fistName: String,
+    firstName: String,
     lastName: String,
+    imageUrl : String,
     headline : String,
-    skills: [],
-    status: [],
+    skills: [String],
+    status: [statusSchema],
     education:[educationSchema],
     experience:[experienceSchema],
-    following: [String] // companyId
+    following: [String], // companyId
+    companyId: String
 });
 
 module.exports = mongoose.model('User', userSchema);
