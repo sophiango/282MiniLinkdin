@@ -42,10 +42,19 @@ router.get('/:user_id', function (req, res) {
 router.post('/:user_id', function (req, res) {
     var user_id = req.params.user_id;
     console.log("Method put is called");
-    //res.render('edit_user',{
-    //    name: foundUser.firstName + " " + foundUser.lastName,
-    //    User: foundUser,
-    //    Company: foundCompany});
+    User.findOne({userId:user_id},function(err,foundUser){
+        if (err) console.log(err);
+        else {
+            Company.findOne({name:foundUser.experience[0].company},function(err,foundCompany){
+                if (err) console.log(err);
+                else {
+                    res.render('edit_user',{
+                        user_id: user_id,
+                        name: foundUser.firstName + " " + foundUser.lastName,
+                        User: foundUser,
+                        Company: foundCompany});
+                }
+            });}});
     //newHeadline = req.body.headline;
     //User.update({userId:user_id},{$set:{headline:newHeadline}},
     //    function(err){

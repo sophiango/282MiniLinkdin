@@ -14,66 +14,133 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <form method="PUT" action="/user/<%=req.params.user_id%>">
-    <div id="user_profile">
-    <center>
-    <img src=<%=User.imageUrl%> alt="profile_pic" class="img-circle">
-    <h2><%=User.firstName + " " + User.lastName%></h2>
-    <h4><em><%=User.headline%></em></h4>
-    <span><h3>Skills:
-        <% for(var i=0; i< User.skills.length; i++) {%>
-            <span class="label label-primary"><%=User.skills[i]%></span>
-        <%}%>
-        </h3></span>
-    </center>
-    </div>
+    <form method="POST" action="/user/<%=user_id%>" class="form-horizontal">
+        <div id="user_profile">
+            <center>
+                <div>
+                    <img src=<%=User.imageUrl%> alt="profile_pic" class="img-circle">
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2 control-label">
+                        <label for="firstname">First name: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputFirstName" placeholder=<%=User.firstName%>>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2 control-label">
+                        <label for="lastname">Last name: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputLastName" placeholder=<%=User.lastName%>>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2 control-label">
+                        <label for="headline">Headline: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputHeadline" placeholder=<%=User.headline%>>
+                    </div>
+                </div>
+                <div class="col-lg-2 control-label">
+                    <label for="skill">Skills: </label>
+                </div>
+                <div class="col-lg-8">
+                    <% for(var i=0; i< User.skills.length; i++) {%>
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control" placeholder=<%=User.skills[i]%>>
+                    </div>
+                    <%}%>
+                </div>
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add skills
+                    </button>
+                </div>
+            </center>
+        </div>
 
-    <hr>
-
-    <div class="row" id="experience">
-        <div class="col-md-8">
+        <hr>
+        <div class="row" id="experience">
             <h2>Experience</h2>
-        </div>
-        <div class="col-md-4">
-            <button type="button" class="btn btn-default">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Star
-            </button>
-        </div>
-        <% for(var i=0; i< User.experience.length; i++) {%>
-        <div>
-            <div class="col-md-8">
-                <h3><%=User.experience[i].position%></h3>
-                <h4><%=User.experience[i].company%></h4>
-                <em><%=User.experience[i].from + " - " + User.experience[i].to%></em>
+            <% for(var i=0; i< User.experience.length; i++) {%>
+            <div>
+                <div class="form-group">
+                    <div class="col-lg-2 control-label">
+                        <label for="position">Position: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" placeholder=<%=User.experience[i].position%>>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2 control-label">
+                        <label for="position">Company: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" placeholder=<%=User.experience[i].company%> disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                <div class="col-lg-3 col-xs-2">
+                    <input type="text" class="form-control" placeholder=<%=User.experience[i].from%>>
+                </div>
+                <div class="col-lg-3 col-xs-2">
+                    <input type="text" class="form-control" placeholder=<%=User.experience[i].to%>>
+                </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2 control-label">
+                        <label for="position">Description: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="3"><%=User.experience[i].description%></textarea>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                <img src=<%=Company.imageUrl%> alt="company_logo" class="img-thumbnail">
-            </div>
-            <div class="col-md-12">
-            <p><%=User.experience[i].description%></p>
-            </div>
+            <%}%>
         </div>
-        <%}%>
-    </div>
 
-    <hr>
-
-    <div class="row" id="education">
-        <h2>Education</h2>
-        <% for(var i=0; i< User.education.length; i++) {%>
-        <div class="col-md-8">
-            <h3><%=User.education[i].institution%></h3>
-            <h4><%=User.education[i].degree%></h4>
-            <em><%=User.education[i].fromYear + " - " + User.education[i].toYear%></em>
+        <hr>
+        <div class="row" id="experience">
+            <h2>Education</h2>
+            <% for(var i=0; i< User.experience.length; i++) {%>
+            <div>
+                <div class="form-group">
+                    <div class="col-lg-2 control-label">
+                        <label>School: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" placeholder=<%=User.education[i].institution%>>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-2 control-label">
+                        <label>Degree: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" placeholder=<%=User.education[i].degree%>>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-3 col-xs-2">
+                        <input type="text" class="form-control" placeholder=<%=User.education[i].fromYear%>>
+                    </div>
+                    <div class="col-lg-3 col-xs-2">
+                        <input type="text" class="form-control" placeholder=<%=User.education[i].toYear%>>
+                    </div>
+                </div>
+                </div>
+            <%}%>
         </div>
-        <%}%>
-        <!--<div class="col-md-4">-->
-            <!--<img src="https://media.licdn.com/media/p/2/005/074/2aa/1c3bae2.png" alt="company_logo" class="img-thumbnail">-->
-        <!--</div>-->
-    </div>
-
-    </div> <!--container!-->
-</form>
+        
+        <div class="pull-right">
+            <button type="submit" class="btn btn-success btn-lg">Save</button>
+        </div>
+    </form>
+</div> <!--container!-->
 <script type="text/javascript">
     $(document).ready(function() {
         $('#home').addClass("active");
