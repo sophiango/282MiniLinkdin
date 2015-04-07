@@ -6,43 +6,10 @@ var Company = require('../models/company');
 
 router.post('/',function(req,res){
     var user_id_str = chance.natural({min: 1, max: 100000}).toString();
-    //company_id = (company_id + 1);
-    //var companyId_str = company_id.toString();
     var newUser = new User ({
         userId : user_id_str,
-        firstName : req.body.firstName,
-        lastName : req.body.lastName,
-        headline : req.body.headline,
-        imageUrl : req.body.imageUrl,
-        education : [
-            {institution: req.body.institution,
-            degree: req.body.degree,
-            fromYear: req.body.fromYear,
-            toYear: req.body.toYear}],
-        experience : [{
-            position: req.body.position,
-            company: req.body.company,
-            from: req.body.from,
-            to: req.body.to,
-            description: req.body.description
-        }],
-        companyId :null
-    });
-    //newUser.education.push({
-    //    institution: req.body.institution,
-    //    degree: req.body.degree,
-    //    fromYear: req.body.fromYear,
-    //    toYear: req.body.toYear
-    //})
-    //
-    //newUser.experience.push({
-    //    position: req.body.position,
-    //    company: req.body.company,
-    //    from: req.body.from,
-    //    to: req.body.to,
-    //    description: req.body.description
-    //})
-
+        firstName : req.body.inputFirstName,
+        lastName : req.body.inputLastName});
     newUser.save(function (err, newUser) {
         if (err) console.log(err);
         else {
@@ -63,38 +30,28 @@ router.get('/:user_id', function (req, res) {
             Company.findOne({name:foundUser.experience[0].company},function(err,foundCompany){
                 if (err) console.log(err);
                 else {
-                    console.log('Found user: ' + foundUser.firstName);
-                    var fullName = foundUser.firstName + " " + foundUser.lastName;
-                    res.render('user', {
-                        title: 'Mini-Linkedin',
-                        name: fullName,
-                        headline: foundUser.headline,
-                        image_url: foundUser.imageUrl,
-                        position_time_range: foundUser.experience[0].from + " - " + foundUser.experience[0].to,
-                        skill_1: foundUser.skills[0],
-                        skill_2: foundUser.skills[1],
-                        skill_3: foundUser.skills[2],
-                        skill_4: foundUser.skills[3],
-                        skill_5: foundUser.skills[4],
-                        institution: foundUser.education[0].institution,
-                        degree: foundUser.education[0].degree,
-                        school_time_range: foundUser.education[0].fromYear + " - " + foundUser.education[0].toYear,
-                        position: foundUser.experience[0].position,
-                        company_name: foundUser.experience[0].company,
-                        company_logo: foundCompany.imageUrl,
-                        job_description: foundUser.experience[0].description
-                    });}
+                    res.render('user',{
+                        user_id: user_id,
+                        name: foundUser.firstName + " " + foundUser.lastName,
+                        User: foundUser,
+                        Company: foundCompany});
+                    }
             });}});
 });
 
-router.put('/:user_id', function (req, res) {
+router.post('/:user_id', function (req, res) {
     var user_id = req.params.user_id;
-    newHeadline = req.body.headline;
-    User.update({userId:user_id},{$set:{headline:newHeadline}},
-        function(err){
-            if (err) console.log(err);
-            res.status(200).send('Successfully update a job');
-        })
+    console.log("Method put is called");
+    //res.render('edit_user',{
+    //    name: foundUser.firstName + " " + foundUser.lastName,
+    //    User: foundUser,
+    //    Company: foundCompany});
+    //newHeadline = req.body.headline;
+    //User.update({userId:user_id},{$set:{headline:newHeadline}},
+    //    function(err){
+    //        if (err) console.log(err);
+    //        //res.status(200).send('Successfully update a job');
+    //    })
 });
 
 router.delete('/:user_id', function (req, res) {

@@ -9,7 +9,7 @@
                 <ul class="nav nav-pills pull-right">
                     <li role="presentation" class="active"><a href="#">Home</a></li>
                     <li role="presentation"><a href="#">About</a></li>
-                    <li role="presentation"><a href="#">Contact</a></li>
+                    <li role="presentation"><a href="#">The team</a></li>
                 </ul>
             </nav>
             <h3 class="text-muted">Project name</h3>
@@ -21,8 +21,7 @@
             <form class="form-inline">
             <a data-toggle="modal" href="#myModal" class="btn btn-primary">Sign up today</a>
             <h4> OR Search for job </h4>
-            <a class="btn btn-primary">Search</a>
-            <input type="text" class="form-control" id="search_parameter" placeholder="Job title or Company">
+            <input type="text" class="form-control" id="search_parameter" placeholder="Job title or Company"><a class="btn btn-primary">Search</a>
             </form>
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog">
@@ -32,11 +31,11 @@
                             <h4 class="modal-title">Sign up</h4>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" method="post" action="/user">
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+                                    <input type="text" class="form-control" name="inputFirstName" placeholder="First Name">
                                     </br>
-                                    <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                                    <input type="text" class="form-control" name="inputLastName" placeholder="Last Name">
                                     </br>
                                     <input type="email" class="form-control" id="inputEmail" placeholder="Email">
                                     </br>
@@ -76,7 +75,6 @@
                 <p><%=more_sub_header_3%></p>
             </div>
         </div>
-
         <footer class="footer">
             <p>&copy; Company 2014</p>
         </footer>
