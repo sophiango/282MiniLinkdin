@@ -1,20 +1,20 @@
 var mongoose = require('mongoose');
 
 var statusSchema = new mongoose.Schema({
-    content: String,
+    content: {type : String , required : true},
     createAt: {type: Date, default: Date.now}
 })
 
-var jobSchema = new mongoose.Schema({
-    jobId: String,
-    position: String,
-    location: String,
-    description: String,
-    createAt: {type: Date, expires: '1d', default: Date.now}
-},{ _id : false })
+//var jobSchema = new mongoose.Schema({
+//    jobId: String,
+//    position: String,
+//    location: String,
+//    description: String,
+//    createAt: {type: Date, expires: '1d', default: Date.now}
+//},{ _id : false })
 
 var companySchema = new mongoose.Schema({
-    companyId : String,
+    companyId : {type : String , required : true, unique: true, dropDups: true},
     name : String,
     //address: String,
     //url: String,

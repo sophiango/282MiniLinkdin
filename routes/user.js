@@ -5,6 +5,19 @@ var User = require('../models/user');
 var Company = require('../models/company');
 var Job = require('../models/job');
 
+router.get('/:user_id/dashboard',function(req,res){
+    User.findOne({userId:req.params.user_id},function(err,foundUser){
+        if (err) console.log(err);
+        else {
+            res.render('dashboard',{
+                name: User.firstName,
+                connection_count: '100',
+                User: foundUser
+            })
+        }
+    });
+});
+
 router.post('/',function(req,res){
     var user_id_str = chance.natural({min: 1, max: 100000}).toString();
     var newUser = new User ({
@@ -15,14 +28,16 @@ router.post('/',function(req,res){
         if (err){
             res.render('user_signup_form',{
                 message: null,
-                error: err
+                err: err,
+                next_page: null
             });
             console.log(err);
         }
         else {
             res.render('user_signup_form',{
                 message: "Congratulation! User profile is created",
-                error: null
+                err: null,
+                next_page: "Go back home"
             });
         }
     });
@@ -54,21 +69,41 @@ router.get('/:user_id/edit_profile',function (req, res) {
 
 router.post('/:user_id/edit_profile', function (req, res) {
     var user_id = req.params.user_id;
-    return User.findOne({userId:req.params.user_id}, function (err, foundUser) {
-        foundUser.firstName = req.body.firstName;
-        foundUser.lastName = req.body.lastName;
-        foundUser.headline = req.body.headline;
-        return foundUser.save(function (err) {
-            if (!err) {
-                res.render('user',{
-                    name: foundUser.firstName + " " + foundUser.lastName,
-                    connection_count: '100',
-                    User: foundUser});
-            } else {
-                console.log(err);
+    User.update({userId:user_id},{$set: {
+            firstName : req.body.firstName,
+            lastName : req.body.lastName,
+            headline : req.body.headline
+        }},
+        function(err,foundUser){
+            if (err) console.log(err);
+            else{
+                User.findOne({userId:req.params.user_id}, function (err, foundUser) {
+                    if (err) console.log(err);
+                    else {
+                        res.render('user', {
+                            name: foundUser.firstName + " " + foundUser.lastName,
+                            connection_count: '100',
+                            User: foundUser
+                        });
+                    }
+                });
             }
         });
-    });
+    //return User.findOne({userId:req.params.user_id}, function (err, foundUser) {
+    //    foundUser.firstName = req.body.firstName;
+    //    foundUser.lastName = req.body.lastName;
+    //    foundUser.headline = req.body.headline;
+    //    return foundUser.save(function (err) {
+    //        if (!err) {
+    //            res.render('user',{
+    //                name: foundUser.firstName + " " + foundUser.lastName,
+    //                connection_count: '100',
+    //                User: foundUser});
+    //        } else {
+    //            console.log(err);
+    //        }
+    //    });
+    //});
     //User.update({userId: user_id}, {
     //        $set: {
     //            firstName: req.body.inputFirstName,
@@ -126,8 +161,8 @@ router.post('/:user_id/exp',function (req, res) {
             foundUser.experience.push({
                 position: req.body.inputPosition,
                 company: req.body.inputCompany,
-                fromYear: req.body.inputFrom,
-                toYear: req.body.inputTo,
+                from: req.body.inputFrom,
+                to: req.body.inputTo,
                 description: req.body.inputDesc
             });
             foundUser.save(function (err) {
@@ -136,7 +171,7 @@ router.post('/:user_id/exp',function (req, res) {
                         user_id: User.userId,
                         name: null,
                         message:null,
-                        error: err
+                        err: err
                     })
                 }
                 else{
@@ -144,7 +179,7 @@ router.post('/:user_id/exp',function (req, res) {
                         user_id: User.userId,
                         name: null,
                         message:"Successfully added an experience. You can add more experience or go back to your profile",
-                        error: null
+                        err: null
                     })
                 }
             });
@@ -153,14 +188,13 @@ router.post('/:user_id/exp',function (req, res) {
 });
 
 router.get('/:user_id/exp',function (req, res) {
-   res.render('add_new_exp',{
-       user_id: req.params.user_id,
-       name: null,
-       message:null,
-       error:null
-   })
+    res.render('add_new_exp',{
+        user_id: req.params.user_id,
+        name: null,
+        message:null,
+        err:null
+    })
 });
-
 
 router.get('/:user_id/edit_exp',function (req, res) {
     User.findOne({userId:req.params.user_id},function(err,foundUser){
@@ -170,18 +204,15 @@ router.get('/:user_id/edit_exp',function (req, res) {
                 res.render('edit_exp', {
                     user_id: req.params.user_id,
                     name: null,
-                    User: foundUser,
-                    message: "Editing experience",
-                    btn: "Save"
+                    User: foundUser
                 })
             }
             else{
-                res.render('edit_exp', {
+                res.render('add_new_exp', {
                     user_id: req.params.user_id,
                     name: null,
-                    User: foundUser,
-                    message: "No experience to edit",
-                    btn: "Go back"
+                    message: null,
+                    err: null
                 })
             }
         }
@@ -191,9 +222,11 @@ router.get('/:user_id/edit_exp',function (req, res) {
 router.post('/:user_id/edit_exp', function (req, res) {
     var user_id = req.params.user_id;
     return User.findOne({userId: req.params.user_id}, function (err, foundUser) {
-        foundUser.firstName = req.body.firstName;
-        foundUser.lastName = req.body.lastName;
-        foundUser.headline = req.body.headline;
+        foundUser.position= req.body.inputPosition,
+            foundUser.company= req.body.inputCompany,
+            foundUser.from= req.body.inputFrom,
+            foundUser.to= req.body.inputTo,
+            foundUser.description= req.body.inputDesc
         return foundUser.save(function (err) {
             if (!err) {
                 res.render('user', {
@@ -208,6 +241,90 @@ router.post('/:user_id/edit_exp', function (req, res) {
     });
 });
 
+router.post('/:user_id/edu',function (req, res) {
+    User.findOne({userId:req.params.user_id},function(err,foundUser) {
+        if (err) console.log(err);
+        else {
+            foundUser.education.push({
+                institution: req.body.inputSchool,
+                degree: req.body.inputDegree,
+                fromYear: req.body.inputFrom,
+                toYear: req.body.inputTo
+            });
+            foundUser.save(function (err) {
+                if (err) {
+                    res.render('add_new_edu',{
+                        user_id: User.userId,
+                        name: null,
+                        message:null,
+                        err: err
+                    })
+                }
+                else{
+                    res.render('add_new_edu',{
+                        user_id: User.userId,
+                        name: null,
+                        message:"Successfully added an institution. You can add more institution or go back to your profile",
+                        err: null
+                    })
+                }
+            });
+        }
+    });
+});
+
+router.get('/:user_id/edu',function (req, res) {
+    res.render('add_new_edu',{
+        user_id: req.params.user_id,
+        name: null,
+        message:null,
+        err:null
+    })
+});
+
+router.get('/:user_id/edit_edu',function (req, res) {
+    User.findOne({userId:req.params.user_id},function(err,foundUser){
+        if (err) console.log(err);
+        else {
+            if(foundUser.education.length>0) {
+                res.render('edit_edu', {
+                    user_id: req.params.user_id,
+                    name: null,
+                    User: foundUser
+                })
+            }
+            else{
+                res.render('add_new_edu', {
+                    user_id: req.params.user_id,
+                    name: null,
+                    message: null,
+                    err: null
+                })
+            }
+        }
+    });
+});
+
+router.post('/:user_id/edit_edu', function (req, res) {
+    var user_id = req.params.user_id;
+    return User.findOne({userId: req.params.user_id}, function (err, foundUser) {
+        foundUser.institution= req.body.inputSchool,
+            foundUser.degree= req.body.inputDegree,
+            foundUser.fromYear= req.body.inputFrom,
+            foundUser.toYear= req.body.inputTo
+        return foundUser.save(function (err) {
+            if (!err) {
+                res.render('user', {
+                    name: foundUser.firstName + " " + foundUser.lastName,
+                    connection_count: '100',
+                    User: foundUser
+                });
+            } else {
+                console.log(err);
+            }
+        });
+    });
+});
 
 
 router.delete('/:user_id', function (req, res) {

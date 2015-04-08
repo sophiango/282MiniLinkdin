@@ -14,19 +14,19 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <form method="post" action="/user/<%=user_id%>/exp" class="form-horizontal">
+    <form method="post" action="/user/<%=user_id%>/edit_exp" class="form-horizontal">
         <div id="user_profile">
-            <p class="bg-success"><%=message%></p>
-            <p class="bg-err"><%=err%></p>
             <center>
-                <h4>Add new experience</h4>
+                <h4>Editing education</h4>
                 <div class="row" id="experience">
+                    <% for(var i=0; i< User.education.length; i++) {%>
+                    <div>
                         <div class="form-group required">
                             <div class="col-lg-2 control-label">
-                                <label for="position">Position: </label>
+                                <label for="position">Institution: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name=inputPosition placeholder="Input new position" required="required">
+                                <input type="text" class="form-control" name="inputSchool" placeholder="Input school name" required="required">
                             </div>
                         </div>
                         <div class="form-group required">
@@ -34,31 +34,25 @@
                                 <label for="position">Company: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name=inputCompany placeholder="Input company" required="required">
+                                <input type="text" class="form-control" name="inputDegree" placeholder="Input degree" required="required" >
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group required">
                             <div class="col-lg-3 col-xs-2">
-                                <input type="text" class="form-control" name=inputFrom placeholder="From" required="required">
+                                <input type="text" class="form-control" name="inputFrom" placeholder="From" required="required">
                             </div>
                             <div class="col-lg-3 col-xs-2">
-                                <input type="text" class="form-control" name=inputTo placeholder="To" required="required">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-2 control-label">
-                                <label for="position">Task description: </label>
-                            </div>
-                            <div class="col-lg-10">
-                                <textarea class="form-control" rows="3" name=inputDesc></textarea>
+                                <input type="text" class="form-control" name="inputTo" placeholder="To" required="required">
                             </div>
                         </div>
                     </div>
+                    <%}%>
+                </div>
             </center>
         </div>
 
         <div class="pull-right">
-            <button type="submit" class="btn btn-success btn-lg">Add</button>
+            <button type="submit" class="btn btn-success btn-lg">Save</button>
         </div>
     </form>
 </div> <!--container!-->

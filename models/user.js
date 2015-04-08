@@ -12,7 +12,7 @@ var experienceSchema = new mongoose.Schema({
     company: String,
     from: String,
     to: String,
-    description: String
+    description:String
 },{ _id : false });
 
 var statusSchema = new mongoose.Schema({
@@ -21,9 +21,9 @@ var statusSchema = new mongoose.Schema({
 })
 
 var userSchema = new mongoose.Schema({
-    userId : String,
-    firstName: String,
-    lastName: String,
+    userId : {type : String , required : true, unique: true, dropDups: true},
+    firstName: {type : String , required : true},
+    lastName: {type : String , required : true},
     imageUrl : String,
     headline : String,
     skills: [String],

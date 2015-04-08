@@ -14,9 +14,13 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <p class="bg-success"><%=message%></p>
-    <p class="bg-error"><%=error%></p>
+    <div class="alert alert-success" role="alert">
+        <%=message%>
+        <a href="index" class="alert-link"><%=next_page%></a>
+    </div>
+    <p class="bg-error"><%=err%></p>
     <br>
+
  <center><h3>Sign up</h3></center>
     <form class="form-horizontal" method="post" action="/user">
         <div class="col-sm-9">

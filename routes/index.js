@@ -13,16 +13,9 @@ router.get('/index', function(req, res) {
 router.get('/signup',function(req,res){
     res.render('user_signup_form',{
         message:null,
-        return_error: null
+        err: null,
+        next_page:null
     });
-});
-
-router.get('/addCompany',function(req,res){
-    res.render('add_company');
-});
-
-router.get('/edit',function(req,res){
-    res.render('edit_user',{name:"Sophia"});
 });
 
 module.exports = router;
