@@ -7,7 +7,13 @@ var Job = require('../models/job');
 
 router.get('/:user_id/dashboard',function(req,res){
     User.findOne({userId:req.params.user_id},function(err,foundUser){
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.render('index',{
+                message:null,
+                err: 'Cannot find user'
+            })
+        }
         else {
             res.render('dashboard',{
                 name: User.firstName,
@@ -26,12 +32,12 @@ router.post('/',function(req,res){
         lastName : req.body.inputLastName});
     newUser.save(function (err, newUser) {
         if (err){
+            console.log(err);
             res.render('user_signup_form',{
                 message: null,
-                err: err,
+                err: "Cannot create new user",
                 next_page: null
             });
-            console.log(err);
         }
         else {
             res.render('user_signup_form',{
@@ -49,7 +55,13 @@ router.get('/:user_id', function (req, res) {
         res.status(404).send('Invalid company id');
     }
     User.findOne({userId:user_id},function(err,foundUser){
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.render('index',{
+                message:null,
+                err: 'Cannot find user'
+            })
+        }
         else {
             console.log(foundUser);
             res.render('user',{
@@ -75,10 +87,24 @@ router.post('/:user_id/edit_profile', function (req, res) {
             headline : req.body.headline
         }},
         function(err,foundUser){
-            if (err) console.log(err);
+            if (err) {
+                console.log(err);
+                res.render('index',{
+                    message:null,
+                    err: 'Cannot edit user'
+                })
+            }
             else{
                 User.findOne({userId:req.params.user_id}, function (err, foundUser) {
-                    if (err) console.log(err);
+                    if (err) {
+                        console.log(err);
+                        if (err) {
+                            res.render('index',{
+                                message:null,
+                                err: 'Cannot find user'
+                            })
+                        }
+                    }
                     else {
                         res.render('user', {
                             name: foundUser.firstName + " " + foundUser.lastName,
@@ -89,74 +115,17 @@ router.post('/:user_id/edit_profile', function (req, res) {
                 });
             }
         });
-    //return User.findOne({userId:req.params.user_id}, function (err, foundUser) {
-    //    foundUser.firstName = req.body.firstName;
-    //    foundUser.lastName = req.body.lastName;
-    //    foundUser.headline = req.body.headline;
-    //    return foundUser.save(function (err) {
-    //        if (!err) {
-    //            res.render('user',{
-    //                name: foundUser.firstName + " " + foundUser.lastName,
-    //                connection_count: '100',
-    //                User: foundUser});
-    //        } else {
-    //            console.log(err);
-    //        }
-    //    });
-    //});
-    //User.update({userId: user_id}, {
-    //        $set: {
-    //            firstName: req.body.inputFirstName,
-    //            lastName: req.body.inputLastName,
-    //            headline: req.body.inputHeadline
-    //        }
-    //    },
-    //    function (err, updatedJob) {
-    //        if (err) console.log(err);
-    //        else {
-    //            User.findOne({userId: user_id}, function (err, foundUser) {
-    //                if (err) console.log(err);
-    //                else {
-    //                    res.render('user', {
-    //                        name: foundUser.firstName,
-    //                        connection_count: '100',
-    //                        User: foundUser
-    //                    });
-    //                }
-    //            });
-    //        }
-    //    });
-    //User.findOne({userId:user_id},function(err,foundUser){
-    //    if (err) console.log(err);
-    //    else {
-    //        console.log("Method put is called on user id " + foundUser.userId);
-    //        if (req.body.inputFirstName!='null') foundUser.firstName = req.body.inputFirstName;
-    //        if (req.body.inputLastName!='null') foundUser.lastName = req.body.inputLastName;
-    //        console.log("input: " + req.body.inputFirstName);
-    //        //User.update({companyId:comp_id},{$set:{
-    //        //        if req.body.inputFirstName!='null'
-    //        //}
-    //        //        name:newName,imageUrl:newImageUrl,subLine:newSubLine}},
-    //        //    function(err,updatedJob){
-    //        //        if (err) console.log(err);
-    //        //        res.status(200).send('Successfully update a job');
-    //        //    })
-    //        res.render('edit_user',{
-    //            name: foundUser.firstName + " " + foundUser.lastName,
-    //            User:foundUser});
-    //    }
-    //});
-    //User.update({userId:user_id},{$set:{
-    //        headline:newHeadline
-    //    }},
-    //    function(err){
-    //        if (err) console.log(err);
-    //        //res.status(200).send('Successfully update a job');
-    //    })
 });
+
 router.post('/:user_id/exp',function (req, res) {
     User.findOne({userId:req.params.user_id},function(err,foundUser) {
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.render('index',{
+                message:null,
+                err: 'Cannot find user'
+            })
+        }
         else {
             foundUser.experience.push({
                 position: req.body.inputPosition,
@@ -167,11 +136,12 @@ router.post('/:user_id/exp',function (req, res) {
             });
             foundUser.save(function (err) {
                 if (err) {
+                    console.log(err);
                     res.render('add_new_exp',{
                         user_id: User.userId,
                         name: null,
                         message:null,
-                        err: err
+                        err: "Cannot add new experience"
                     })
                 }
                 else{
@@ -198,7 +168,13 @@ router.get('/:user_id/exp',function (req, res) {
 
 router.get('/:user_id/edit_exp',function (req, res) {
     User.findOne({userId:req.params.user_id},function(err,foundUser){
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.render('index',{
+                message:null,
+                err: 'Cannot find user'
+            })
+        }
         else {
             if(foundUser.experience.length>0) {
                 res.render('edit_exp', {
@@ -243,7 +219,13 @@ router.post('/:user_id/edit_exp', function (req, res) {
 
 router.post('/:user_id/edu',function (req, res) {
     User.findOne({userId:req.params.user_id},function(err,foundUser) {
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.render('index',{
+                message:null,
+                err: 'Cannot find user'
+            })
+        }
         else {
             foundUser.education.push({
                 institution: req.body.inputSchool,
@@ -257,7 +239,7 @@ router.post('/:user_id/edu',function (req, res) {
                         user_id: User.userId,
                         name: null,
                         message:null,
-                        err: err
+                        err: "Cannot add new institution"
                     })
                 }
                 else{
@@ -284,7 +266,13 @@ router.get('/:user_id/edu',function (req, res) {
 
 router.get('/:user_id/edit_edu',function (req, res) {
     User.findOne({userId:req.params.user_id},function(err,foundUser){
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.render('index',{
+                message:null,
+                err: 'Cannot find user'
+            })
+        }
         else {
             if(foundUser.education.length>0) {
                 res.render('edit_edu', {
@@ -308,7 +296,7 @@ router.get('/:user_id/edit_edu',function (req, res) {
 router.post('/:user_id/edit_edu', function (req, res) {
     var user_id = req.params.user_id;
     return User.findOne({userId: req.params.user_id}, function (err, foundUser) {
-        foundUser.institution= req.body.inputSchool,
+            foundUser.institution= req.body.inputSchool,
             foundUser.degree= req.body.inputDegree,
             foundUser.fromYear= req.body.inputFrom,
             foundUser.toYear= req.body.inputTo
@@ -321,20 +309,34 @@ router.post('/:user_id/edit_edu', function (req, res) {
                 });
             } else {
                 console.log(err);
+                res.render('index',{
+                    message:null,
+                    err: 'Cannot edit education'
+                })
             }
         });
     });
 });
 
-
-router.delete('/:user_id', function (req, res) {
+router.post('/:user_id/del', function (req, res) {
     var user_id = req.params.user_id;
     if (user_id < 0){
         res.status(404).send('Invalid company id or job id');
     }
     User.remove({userId:user_id},function(err) {
-        if (err) console.log(err);
-        else res.status(204).send('Successfully delete user');
+        if (err) {
+            console.log(err);
+            res.render('index',{
+                message:null,
+                err: 'Cannot delete user'
+            })
+        }
+        else {
+            res.render('index',{
+                message:"Successfully delete user profile",
+                err: null
+            })
+        };
     })
 });
 
@@ -344,7 +346,13 @@ router.get('/:user_id/company/:comp_id', function (req, res) {
         res.status(404).send('Invalid company id');
     }
     Company.findOne({companyId:comp_id},function(err,foundCompany){
-        if (err) console.log(err);
+        if (err) {
+            console.log(err);
+            res.render('index',{
+                message:null,
+                err: 'Cannot find user'
+            })
+        }
         else {
             res.render('company',{
                 Company: foundCompany
