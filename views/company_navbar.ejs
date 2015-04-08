@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><%=title %></a>
+            <a class="navbar-brand" href="#">Mini Linkedin</a>
         </div>
 
         <form class="navbar-form navbar-left" method="GET" action="/search">
@@ -26,7 +26,7 @@
                             <a href="#">
                                 <div class="media">
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong><%=company_name%></strong>
+                                        <h5 class="media-heading"><strong><%=Company.name%></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -51,7 +51,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><%=company_name%><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><%=Company.name%><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Profile</a>

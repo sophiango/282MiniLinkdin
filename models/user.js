@@ -30,7 +30,6 @@ var userSchema = new mongoose.Schema({
     status: [statusSchema],
     education:[educationSchema],
     experience:[experienceSchema],
-    following: [String], // companyId
     companyId: String
 });
 

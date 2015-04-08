@@ -21,9 +21,7 @@ var companySchema = new mongoose.Schema({
     imageUrl : String,
     //parentCompanyId: String,
     subLine: String,
-    status: [statusSchema],
-    jobs:[jobSchema],
-    followers:[String]
+    status: [statusSchema]
     //jobs: [{
     //    jobId: String,
     //    title: String,

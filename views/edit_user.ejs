@@ -14,7 +14,7 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <form method="POST" action="/user/<%=user_id%>" class="form-horizontal">
+    <form method="put" action="/user/<%=User.userId%>" class="form-horizontal">
         <div id="user_profile">
             <center>
                 <div>
@@ -25,7 +25,7 @@
                         <label for="firstname">First name: </label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputFirstName" placeholder=<%=User.firstName%>>
+                        <input type="text" class="form-control" name=User.firstName placeholder=<%=User.firstName%>>
                     </div>
                 </div>
                 <div class="form-group">
@@ -33,7 +33,7 @@
                         <label for="lastname">Last name: </label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputLastName" placeholder=<%=User.lastName%>>
+                        <input type="text" class="form-control" name=User.lastName placeholder=<%=User.lastName%>>
                     </div>
                 </div>
                 <div class="form-group">
@@ -41,7 +41,7 @@
                         <label for="headline">Headline: </label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputHeadline" placeholder=<%=User.headline%>>
+                        <input type="text" class="form-control" name="User.headline" placeholder=<%=User.headline%>>
                     </div>
                 </div>
                 <div class="col-lg-2 control-label">
@@ -104,48 +104,13 @@
         </div>
 
         <hr>
-        <div class="row" id="experience">
-            <h2>Education</h2>
-            <% for(var i=0; i< User.experience.length; i++) {%>
-            <div>
-                <div class="form-group">
-                    <div class="col-lg-2 control-label">
-                        <label>School: </label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" placeholder=<%=User.education[i].institution%>>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-2 control-label">
-                        <label>Degree: </label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" placeholder=<%=User.education[i].degree%>>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-3 col-xs-2">
-                        <input type="text" class="form-control" placeholder=<%=User.education[i].fromYear%>>
-                    </div>
-                    <div class="col-lg-3 col-xs-2">
-                        <input type="text" class="form-control" placeholder=<%=User.education[i].toYear%>>
-                    </div>
-                </div>
-                </div>
-            <%}%>
-        </div>
-        
+
+
         <div class="pull-right">
             <button type="submit" class="btn btn-success btn-lg">Save</button>
         </div>
     </form>
 </div> <!--container!-->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#home').addClass("active");
-    });
-</script>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
