@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<body>
+<% include index_navbar %>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="index.ejs">Home</a></li>
+                <li role="presentation"><a href="#">About</a></li>
+                <li role="presentation"><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Project name</h3>
+    </div>
+    <p class="bg-success"><%=message%></p>
+    <p class="bg-danger"><%=err%></p>
+    <br>
+
+ <center><h3>Log in</h3></center>
+    <form class="form-horizontal" method="get" action="/user/:user_id">
+        <div class="form-group required">
+            <div class="col-lg-2 control-label">
+                <label>Email: </label>
+            </div>
+            <div class="col-lg-10">
+                <input type="email" class="form-control" name="inputEmail" placeholder="Input email" required="required">
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <div class="col-lg-2 control-label">
+                <label>Password: </label>
+            </div>
+            <div class="col-lg-10">
+                <input type="password" class="form-control" name="inputSchool" placeholder="Password" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <label class="radio-inline">
+                    <input type="radio" name="inlineRadioOptions" name="userLogin" value="option1"> User
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="inlineRadioOptions" name="companyLogin" value="option2"> Company
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-10">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -6,28 +6,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.ejs">Mini Linkedin</a>
+        <a class="navbar-brand" href="index">Mini Linkedin</a>
     </div>
     <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
             <li>
-                <a href="#">About</a>
+                <a href="index">Home</a>
             </li>
             <li>
-                <a href="#">The Team</a>
+                <a href="#">Profile</a>
             </li>
-        </ul>
-
-        <!--Search bar -->
-        <form class="navbar-form navbar-left" method="GET" action="/search">
-            <div class="input-group">
-                <input type="text" class="form-control" name="search_parameter" placeholder="Search for...">
+            <li>
+                <a href="#">Company</a>
+            </li>
+            <li>
+                <!--Search bar -->
+                <form class="navbar-form navbar-left" method="GET" action="/search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search_parameter" placeholder="Search for...">
                      <span class="input-group-btn">
                          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                      </span>
-            </div><!-- /input-group -->
-        </form>
-
+                    </div><!-- /input-group -->
+                </form>
+            </li>
+        </ul>
 
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -37,7 +40,8 @@
                         <a href="#">
                             <div class="media">
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong><%=name%></strong>
+                                    <!-- Put user name on nav bar here -->
+                                    <h5 class="media-heading"><strong><!-- Put user name on nav bar here --></strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -62,7 +66,8 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><%= name%><b class="caret"></b></a>
+                <!-- Put user name on nav bar here -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><!-- Put user name on nav bar here --><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit profile</a>

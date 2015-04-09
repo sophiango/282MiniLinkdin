@@ -14,37 +14,49 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <div id="user_profile" class="row">
-        <div class="col-lg-7">
+    <div>
+        <!--<div id="user_profile" class="col-md-8">-->
+        <center>
             <img src=<%=Company.imageUrl%> alt="company_logo" class="img-thumbnail">
             <h2><%=Company.name%></h2>
             <em><%=Company.subLine%></em>
-        </div>
-        <div class="col-lg-5">
-            <span><button class="btn btn-default">Follow</button></span>
-            <span><label><%=count%> followers</label></span>
-        </div>
+            <label><%=count%> followers</label>
+            <br>
+            <button class="btn btn-default">Follow</button>
+        </center>
+        <!--</div>-->
+        <!--<div class="col-md-4">-->
+            <!--<form class="form-horizontal" method="get" action="/company/<Company.companyId>/edit_profile">-->
+                <!--<button type="submit" class="btn btn-default">-->
+                    <!--<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>-->
+                <!--</button>-->
+            <!--</form>-->
+            <!--<br>-->
+            <!--<span><button class="btn btn-default">Follow</button></span>-->
+        <!--</div>-->
     </div>
 
     <hr>
-    <%for (var i = 0; i < Company.jobs.length; i++) {%>
+    <!-- THIS IS THE JOB LISTING. AS JOB IS NOT STORED UNDER COMPANY, YOU WILL HAVE TO GET IT FROM RDS. PLEASE NOTICE THAT I HAVE REMOVE
+    ALL THE SYMBOLS % SO THAT I CAN COMMENT OUT THE SECTION. ADD THEM ACCORDINGLY. FOR EXAMPLE, BEFORE =Company., add %=Company.
+    <for (var i = 0; i < Company.jobs.length; i++) {>
     <div class="row">
         <div class="col-md-2">
-            <img class="img-thumbnail" src=<%=Company.imageUrl%> alt="logo_company_one">
+            <img class="img-thumbnail" src=<=Company.imageUrl> alt="logo_company_one">
         </div>
         <div class="col-md-8">
-            <h3><%=Company.jobs[i].position%></h3>
-            <h5><%=Company.jobs[i].company%></h5>
-            <h5><%=Company.jobs[i].location%></h5>
-            <em><%=Company.jobs[i].createAt%></em>
-            <p><%=Company.jobs[i].description%></p>
+            <h3><=Company.jobs[i].position></h3>
+            <h5><=Company.jobs[i].company></h5>
+            <h5><=Company.jobs[i].location></h5>
+            <em><=Company.jobs[i].createAt></em>
+            <p><=Company.jobs[i].description></p>
         </div>
         <div class="col-md-2">
             <a class="btn btn-primary" href="#">View Job <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
     </div>
-    <%}%>
-    <!-- Pagination -->
+    <}>
+
     <div class="row text-center">
         <div class="col-lg-12">
             <ul class="pagination">
@@ -54,32 +66,33 @@
                 <li class="active">
                     <a href="#">1</a>
                 </li>
-                <%if(Company.jobs.length > 20) {%>
+                <if(Company.jobs.length > 20) {>
                 <li>
                     <a href="#">2</a>
                 </li>
-                <%}%>
-                <%if(Company.jobs.length > 30) {%>
+                <}>
+                <if(Company.jobs.length > 30) {>
                 <li>
                     <a href="#">3</a>
                 </li>
-                <%}%>
-                <%if(Company.jobs.length > 40) {%>
+                <}>
+                <if(Company.jobs.length > 40) {>
                 <li>
                     <a href="#">4</a>
                 </li>
-                <%}%>
-                <%if(Company.jobs.length > 50) {%>
+                <}>
+                <if(Company.jobs.length > 50) {>
                 <li>
                     <a href="#">5</a>
                 </li>
-                <%}%>
+                <}>
                 <li>
                     <a href="#">&raquo;</a>
                 </li>
             </ul>
         </div>
     </div>
+    -->
     <!-- /.row -->
 
     <hr>

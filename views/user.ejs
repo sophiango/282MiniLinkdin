@@ -33,6 +33,17 @@
                 </button>
             </form>
             <br>
+            <!--Add company button -->
+            <form class="form-horizontal" method="post" action="/user/<=User.userId>/company">
+                <a data-toggle="modal" type="submit" href="#myModal" class="btn btn-primary">Add a company</a>
+            </form>
+
+            <form method="post" action="/user/<%=User.userId%>/status">
+            <textarea class="form-control" name="status_input" rows="3"></textarea>
+            <button type="submit" class="btn btn-primary">Post new status</button>
+            </form>
+
+            <br>
             <!--Connection button -->
             <button class="btn btn-primary">Connect</button>
 

@@ -15,16 +15,23 @@
             <h3 class="text-muted">Project name</h3>
         </div>
         <p class="bg-success"><%=message%></p>
-        <p class="bg-err"><%=err%></p>
+        <p class="bg-danger"><%=err%></p>
         <div class="jumbotron">
             <h2>A simplified version of Linkedin</h2>
             <p class="lead">This website is a result of lab 3 CMPE 282 SJSU</p>
-            <form class="form-inline">
-            <!--<form method="get" action="form">-->
+            <span>
+            <form>
+            <!--<form method="get" action="/signup">-->
                 <!--<button type="submit">Sign up today</button>-->
             <!--</form>-->
-            <a href="signup" class="btn btn-primary">Sign up today</a>
+            <a href="signupUser" class="btn btn-primary">Sign up as user</a>
+            </form>
+            <form>
+                <a href="signupComp" class="btn btn-primary">Sign up as company</a>
+            </form>
+            </span>
             <h4> OR Search for job </h4>
+            <form>
             <input type="text" class="form-control" id="search_parameter" placeholder="Job title or Company"><a class="btn btn-primary">Search</a>
             </form>
         </div>

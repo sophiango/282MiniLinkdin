@@ -15,12 +15,13 @@ var statusSchema = new mongoose.Schema({
 
 var companySchema = new mongoose.Schema({
     companyId : {type : String , required : true, unique: true, dropDups: true},
-    name : String,
+    name : {type : String , required : true, unique: true, dropDups: true},
+    email: {type : String , required : true, unique: true, dropDups: true},
     //address: String,
     //url: String,
     imageUrl : String,
     //parentCompanyId: String,
-    subLine: String,
+    description: String,
     status: [statusSchema]
     //jobs: [{
     //    jobId: String,

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<body>
+<% include profile_navbar %>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="index.ejs">Home</a></li>
+                <li role="presentation"><a href="#">About</a></li>
+                <li role="presentation"><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Project name</h3>
+    </div>
+    <form method="post" action="/company/<%=comp_id%>/edit_profile" class="form-horizontal">
+        <div id="user_profile">
+            <center>
+                <h4>Editing company profile</h4>
+                <div class="form-group required">
+                    <div class="col-lg-2 control-label">
+                        <label>Company name: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name=inputName placeholder="Input new company name" required="required">
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <div class="col-lg-2 control-label">
+                        <label>Description: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name=inputDesc placeholder="Input new description" required="required">
+                    </div>
+                </div>
+            </center>
+        </div>
+
+        <div class="pull-right">
+            <button type="submit" class="btn btn-success btn-lg">Save</button>
+        </div>
+    </form>
+    <form method="post" action="/company/<%=comp_id%>/del" class="form-horizontal">
+        <button type="submit" class="btn btn-danger btn-lg">Delete company</button>
+    </form>
+</div> <!--container!-->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
