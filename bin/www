@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var debug = require('debug')('mini linkedin');
-var app = require('../app');
+var app = require('../server');
 
 app.set('port', process.env.PORT || 8080);
 
