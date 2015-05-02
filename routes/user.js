@@ -5,6 +5,7 @@ var User = require('../models/user');
 var Company = require('../models/company');
 var Job = require('../models/job');
 var UserRecommend = require('../models/UserRecommend');
+var CareerRecommend = require('../models/CareerRecommend');
 var JobRecommend = require('../models/JobRecommend');
 var LookupJob = require('../models/LookupJob');
 var model = require('../models/followUser');
@@ -255,40 +256,72 @@ router.get('/:user_id', function (req, res) {
 });
 
 router.get('/:user_id/recommendJob',function(req,res){
-    User.findOne({userId:req.params.user_id},function(err,foundUser) {
+    JobRecommend.find({userId:req.params.user_id},function(err,result) {
         if (err) {
             console.log(err);
-            res.render('index', {
-                User: foundUser,
-                message: null,
-                err: 'Cannot find user'
+            res.render('recommendJobs', {
+                result: null,
+                errMsg: "No recommend user found for this user"
             })
         }
         else {
-            res.render('recommendJobs', {
-                User: foundUser,
-                message: null,
-                err: null
-            })
+            console.log("result: " + result);
+            var rec1 = result[0].jobId;
+            var rec2 = result[1].jobId;
+            var rec3 = result[2].jobId;
+
+            Job.find({'$or':[{jobId:rec1},{jobId:rec2},{jobId:rec3}]},function(err,jobList) {
+                if (err) {
+                    console.log(err);
+                    res.render('recommendUsers', {
+                        jobList: null,
+                        errMsg: "No recommend user found for this user"
+                    })
+                }
+                else{
+                    console.log("Recommend jobs: " + jobList);
+                    res.render('recommendJobs', {
+                        jobList: jobList,
+                        errMsg: null
+                    })
+                }
+            });
         }
     });
+    //User.findOne({userId:req.params.user_id},function(err,foundUser) {
+    //    if (err) {
+    //        console.log(err);
+    //        res.render('index', {
+    //            User: foundUser,
+    //            message: null,
+    //            err: 'Cannot find user'
+    //        })
+    //    }
+    //    else {
+    //        res.render('recommendJobs', {
+    //            User: foundUser,
+    //            message: null,
+    //            err: null
+    //        })
+    //    }
+    //});
 });
 
-//router.get('/:user_id/test',function(req,res){
-//    console.log("Testing");
-//    var recommend = new UserRecommend({
-//        userId: req.params.user_id,
-//        recommendId: 15
-//    });
-//    recommend.save(function(err,res){
-//        if (err) {
-//            console.log(err);
-//        }
-//        else{
-//            console.log(res);
-//        }
-//    })
-//});
+router.get('/:user_id/test',function(req,res){
+    console.log("Testing");
+    var recommend = new JobRecommend({
+        userId: req.params.user_id,
+        jobId: 15
+    });
+    recommend.save(function(err,res){
+        if (err) {
+            console.log(err);
+        }
+        else{
+            console.log(res);
+        }
+    })
+});
 
 router.get('/:user_id/recommendUser',function(req,res){
     var recommend_user_list = [];
@@ -352,7 +385,7 @@ router.get('/:user_id/recommendCareer',function(req,res){
         }
         else{
             console.log("headline id: " + foundUser.headlineId);
-            JobRecommend.find({position1: foundUser.headlineId},function(err,foundRec){
+            CareerRecommend.find({position1: foundUser.headlineId},function(err,foundRec){
                 if(err){
                     console.log(err);
                     res.render('career_path',{
