@@ -34,7 +34,11 @@ var userSchema = new mongoose.Schema({
     status: [statusSchema],
     education:[educationSchema],
     experience:[experienceSchema],
-    companyId: String
+    companyId: String,
+    headlineId: Number,
+    skillOneId : Number,
+    skillTwoId : Number,
+    skillThreeId : Number
 });
 
 module.exports = mongoose.model('User', userSchema);

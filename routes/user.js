@@ -5,6 +5,8 @@ var User = require('../models/user');
 var Company = require('../models/company');
 var Job = require('../models/job');
 var UserRecommend = require('../models/UserRecommend');
+var JobRecommend = require('../models/JobRecommend');
+var LookupJob = require('../models/LookupJob');
 var model = require('../models/followUser');
 var followCompanyModel = require('../models/followCompany');
 var loginmodel = require('../models/login');
@@ -37,38 +39,38 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
-	  secret: 'keyboard cat',
-	  resave: true,
-	  saveUninitialized: true
-	}));
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
 
 function getFCompaniesSeries(obj,callback){
-	console.log("In Method "+obj.userId + " "+obj.companyId);
-	
-	Company.findOne({companyId:obj.companyId},function(err,foundCompanies){
+    console.log("In Method "+obj.userId + " "+obj.companyId);
+
+    Company.findOne({companyId:obj.companyId},function(err,foundCompanies){
         if (err || foundCompanies===null) {
             console.log(err);
             return callback(foundCompanies);
-              }
+        }
         else {
             console.log(foundCompanies);
-          //  console.log('Found User: ' + foundJob );
+            //  console.log('Found User: ' + foundJob );
             return callback(foundCompanies);
         }
     });
-		
-	}
+
+}
 
 router.get('/profile', function (req, res) {
-	console.log('reached route');
-	 var mySesn = req.session.MyID;	
-     res.redirect('/user/'+mySesn);
+    console.log('reached route');
+    var mySesn = req.session.MyID;
+    res.redirect('/user/'+mySesn);
 });
 
 router.get('/', function (req, res) {
-	console.log('reached route');
-	 var mySesn = req.session.MyID;	
-     res.redirect('/user/'+mySesn+'/home');
+    console.log('reached route');
+    var mySesn = req.session.MyID;
+    res.redirect('/user/'+mySesn+'/home');
 });
 
 router.post('/',function(req,res){
@@ -97,27 +99,27 @@ router.post('/',function(req,res){
 });
 
 router.param('user_id', function(req, res, next, user_id) {
-	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-	var mySesn = req.session.MyID;
-	console.log('it works');
-	console.log('sessionnnnn checkkk'+mySesn);
-   // var user_id = req.params.user_id;
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+    var mySesn = req.session.MyID;
+    console.log('it works');
+    console.log('sessionnnnn checkkk'+mySesn);
+    // var user_id = req.params.user_id;
     console.log('user param is'+user_id);
-   
+
     if(!mySesn || mySesn=='undefined'|| mySesn.toString()!=user_id)
-    	{
-    	 console.log('u r trapped, my friend');
-    	return res.redirect('/login');
-    	}
+    {
+        console.log('u r trapped, my friend');
+        return res.redirect('/login');
+    }
 
     // continue doing what we were doing and go to the route
-    next(); 
+    next();
 });
 
 
 router.get('/:user_id/home',function(req,res){
-	 
-	var userId=req.params.user_id;
+
+    var userId=req.params.user_id;
     User.findOne({userId:userId},function(err,foundUser){
         if (err) {
             console.log(err);
@@ -127,105 +129,105 @@ router.get('/:user_id/home',function(req,res){
             });
         }
         else {
-        	var followUser = model.FollowUser.build();
-        	var followCompanyHandler= followCompanyModel.FollowCompany.build();
-        	followUser.retrieveCoutByUserId(userId,function(connCount) {
-        		if (connCount) {
-        			console.log(connCount);
-        			console.log('Got model');
-        			var fComapanyList = [];
-        			followCompanyHandler.retrieveByUserId(userId,function(followCompanyResult) {
-        				if (followCompanyResult) {
-        					console.log(followCompanyResult);
-        				    console.log("Reahing Series");
-        					function series(i) {
-        						console.log("followCompanys.length "+followCompanyResult.length);
-        			        if(i<followCompanyResult.length) {
-        			        	console.log("Reahed If+ Series "+i+" "+followCompanyResult[i]);
-        			        	getFCompaniesSeries( followCompanyResult[i], function(foundCompanies) {
-        			        		if (foundCompanies){
-        			        			//var index = foundCompanies.status.length;
-        			        		fComapanyList.push(foundCompanies);}
-        			                 series(i+1);
-        			            });
-        			          } else {
-        			        	  console.log("$$$$$$$$$$connectionList "+fComapanyList);
-        			              	//return res.render('viewEditConnections',{fComapanyList:fComapanyList,userId:userId});
-        			        	//return res.render('index',{jobList:jobList});
-        			        	//return res.send({fComapanyList:fComapanyList,userId:userId});
-        			        	res.render('user_home',{
-        	                        connection_count: connCount,
-        	                        fComapanyList:fComapanyList,
-        	                        User: foundUser
-        	                    });
-        			        	  
-        			          }
-        					 }
-        					//jobsApplied.forEach(function(obj) { 
-        						series(0);
+            var followUser = model.FollowUser.build();
+            var followCompanyHandler= followCompanyModel.FollowCompany.build();
+            followUser.retrieveCoutByUserId(userId,function(connCount) {
+                if (connCount) {
+                    console.log(connCount);
+                    console.log('Got model');
+                    var fComapanyList = [];
+                    followCompanyHandler.retrieveByUserId(userId,function(followCompanyResult) {
+                        if (followCompanyResult) {
+                            console.log(followCompanyResult);
+                            console.log("Reahing Series");
+                            function series(i) {
+                                console.log("followCompanys.length "+followCompanyResult.length);
+                                if(i<followCompanyResult.length) {
+                                    console.log("Reahed If+ Series "+i+" "+followCompanyResult[i]);
+                                    getFCompaniesSeries( followCompanyResult[i], function(foundCompanies) {
+                                        if (foundCompanies){
+                                            //var index = foundCompanies.status.length;
+                                            fComapanyList.push(foundCompanies);}
+                                        series(i+1);
+                                    });
+                                } else {
+                                    console.log("$$$$$$$$$$connectionList "+fComapanyList);
+                                    //return res.render('viewEditConnections',{fComapanyList:fComapanyList,userId:userId});
+                                    //return res.render('index',{jobList:jobList});
+                                    //return res.send({fComapanyList:fComapanyList,userId:userId});
+                                    res.render('user_home',{
+                                        connection_count: connCount,
+                                        fComapanyList:fComapanyList,
+                                        User: foundUser
+                                    });
 
-        				} else {
-        					res.render('user_home',{
-    	                        connection_count: 0,
-    	                        fComapanyList:[],
-    	                        User: foundUser
-    	                    });
-        				}
-        			}, function(error) {
-        				res.send(error);
-        			});
-        			//res.send({'connCount':connCount});
-        			
+                                }
+                            }
+                            //jobsApplied.forEach(function(obj) {
+                            series(0);
 
-        		} else {
-        			//no followers  but may have companies
-        			
-        			var fComapanyList = [];
-        			followCompanyHandler.retrieveByUserId(userId,function(followCompanyResult) {
-        				if (followCompanyResult) {
-        					console.log(followCompanyResult);
-        				    console.log("Reahing Series");
-        					function series(i) {
-        						console.log("followCompanys.length "+followCompanyResult.length);
-        			        if(i<followCompanyResult.length) {
-        			        	console.log("Reahed If+ Series "+i+" "+followCompanyResult[i]);
-        			        	getFCompaniesSeries( followCompanyResult[i], function(foundCompanies) {
-        			        		if (foundCompanies){
-        			        			//var index = foundCompanies.status.length;
-        			        		fComapanyList.push(foundCompanies);}
-        			                 series(i+1);
-        			            });
-        			          } else {
-        			        	  console.log("$$$$$$$$$$connectionList "+fComapanyList);
-        			              	//return res.render('viewEditConnections',{fComapanyList:fComapanyList,userId:userId});
-        			        	//return res.render('index',{jobList:jobList});
-        			        	//return res.send({fComapanyList:fComapanyList,userId:userId});
-        			        	res.render('user_home',{
-        	                        connection_count: connCount,
-        	                        fComapanyList:fComapanyList,
-        	                        User: foundUser
-        	                    });
-        			        	  
-        			          }
-        					 }
-        					//jobsApplied.forEach(function(obj) { 
-        						series(0);
+                        } else {
+                            res.render('user_home',{
+                                connection_count: 0,
+                                fComapanyList:[],
+                                User: foundUser
+                            });
+                        }
+                    }, function(error) {
+                        res.send(error);
+                    });
+                    //res.send({'connCount':connCount});
 
-        				} else {
-        					res.render('user_home',{
-    	                        connection_count: 0,
-    	                        fComapanyList:[],
-    	                        User: foundUser
-    	                    });
-        				}
-        			}, function(error) {
-        				res.send(error);
-        			});
-        		}
-        	}, function(error) {
-        		res.send(error);
-        	});
-            
+
+                } else {
+                    //no followers  but may have companies
+
+                    var fComapanyList = [];
+                    followCompanyHandler.retrieveByUserId(userId,function(followCompanyResult) {
+                        if (followCompanyResult) {
+                            console.log(followCompanyResult);
+                            console.log("Reahing Series");
+                            function series(i) {
+                                console.log("followCompanys.length "+followCompanyResult.length);
+                                if(i<followCompanyResult.length) {
+                                    console.log("Reahed If+ Series "+i+" "+followCompanyResult[i]);
+                                    getFCompaniesSeries( followCompanyResult[i], function(foundCompanies) {
+                                        if (foundCompanies){
+                                            //var index = foundCompanies.status.length;
+                                            fComapanyList.push(foundCompanies);}
+                                        series(i+1);
+                                    });
+                                } else {
+                                    console.log("$$$$$$$$$$connectionList "+fComapanyList);
+                                    //return res.render('viewEditConnections',{fComapanyList:fComapanyList,userId:userId});
+                                    //return res.render('index',{jobList:jobList});
+                                    //return res.send({fComapanyList:fComapanyList,userId:userId});
+                                    res.render('user_home',{
+                                        connection_count: connCount,
+                                        fComapanyList:fComapanyList,
+                                        User: foundUser
+                                    });
+
+                                }
+                            }
+                            //jobsApplied.forEach(function(obj) {
+                            series(0);
+
+                        } else {
+                            res.render('user_home',{
+                                connection_count: 0,
+                                fComapanyList:[],
+                                User: foundUser
+                            });
+                        }
+                    }, function(error) {
+                        res.send(error);
+                    });
+                }
+            }, function(error) {
+                res.send(error);
+            });
+
         }
     });
 });
@@ -247,7 +249,7 @@ router.get('/:user_id', function (req, res) {
         else {
             console.log(foundUser.skill1);
             res.render('user',{
-            User: foundUser});
+                User: foundUser});
         }
     });
 });
@@ -272,21 +274,21 @@ router.get('/:user_id/recommendJob',function(req,res){
     });
 });
 
-router.get('/:user_id/test',function(req,res){
-    console.log("Testing");
-    var recommend = new UserRecommend({
-        userId: req.params.user_id,
-        recommendId: 15
-    });
-    recommend.save(function(err,res){
-        if (err) {
-            console.log(err);
-        }
-        else{
-            console.log(res);
-        }
-    })
-});
+//router.get('/:user_id/test',function(req,res){
+//    console.log("Testing");
+//    var recommend = new UserRecommend({
+//        userId: req.params.user_id,
+//        recommendId: 15
+//    });
+//    recommend.save(function(err,res){
+//        if (err) {
+//            console.log(err);
+//        }
+//        else{
+//            console.log(res);
+//        }
+//    })
+//});
 
 router.get('/:user_id/recommendUser',function(req,res){
     var recommend_user_list = [];
@@ -319,28 +321,67 @@ router.get('/:user_id/recommendUser',function(req,res){
     });
 });
 
+router.get('/:user_id/test',function(req,res){
+    console.log("Testing");
+    var recommend = new JobRecommend({
+        position1: 0,
+        position2: "test",
+        position3: "test",
+        position4: "test"
+    });
+    recommend.save(function(err,res){
+        if (err) {
+            console.log(err);
+        }
+        else{
+            console.log(res);
+        }
+    })
+});
+
 router.get('/:user_id/recommendCareer',function(req,res){
+    console.log("recommend career");
     User.findOne({userId:req.params.user_id},function(err,foundUser) {
         if (err) {
             console.log(err);
-            res.render('index', {
-                User: foundUser,
-                message: null,
-                err: 'Cannot find user'
-            })
         }
-        else {
-            res.render('career_path', {
-                User: foundUser,
-                message: null,
-                err: null
-            })
+        else{
+            console.log("headline id: " + foundUser.headlineId);
+            JobRecommend.find({position1: foundUser.headlineId},function(err,foundRec){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log(foundRec[2].position2);
+                    console.log(foundUser.headline);
+                    res.render('career_path',{
+                        foundRec : foundRec,
+                        foundUser : foundUser
+                    })
+                }
+            });
         }
+
+        //if (err) {
+        //    console.log(err);
+        //    res.render('index', {
+        //        User: foundUser,
+        //        message: null,
+        //        err: 'Cannot find user'
+        //    })
+        //}
+        //else {
+        //    res.render('career_path', {
+        //        User: foundUser,
+        //        message: null,
+        //        err: null
+        //    })
+        //}
     });
 });
 
 router.get('/:user_id/edit_profile',function (req, res) {
-	User.findOne({userId:req.params.user_id}, function (err, foundUser) {
+    User.findOne({userId:req.params.user_id}, function (err, foundUser) {
         if (err) {
             console.log("Error in finding user "+err);
             if (err) {
@@ -351,14 +392,14 @@ router.get('/:user_id/edit_profile',function (req, res) {
             }
         }
         else {
-        	console.log("User.imageUrl "+foundUser.imageUrl);
+            console.log("User.imageUrl "+foundUser.imageUrl);
             console.log("User.headline "+foundUser.headline);
-        	res.render('edit_profile',{
+            res.render('edit_profile',{
                 user_id: req.params.user_id,User:foundUser
             });
         }
     });
-    
+
 });
 
 router.post('/:user_id/edit_profile',myMulter, function (req, res) {
@@ -371,45 +412,45 @@ router.post('/:user_id/edit_profile',myMulter, function (req, res) {
     console.log("req.body.skillOneId "+req.body.skillOneId);
     console.log("req.body.skillTwoId "+req.body.skillTwoId);
     console.log("req.body.skillThreeId "+req.body.skillThreeId);
- //  if (req.body.imageUrlHidden)  {link=req.body.imageUrlHidden}  	
-   //else{
+    //  if (req.body.imageUrlHidden)  {link=req.body.imageUrlHidden}
+    //else{
     if (req.files.imageUrl){
-    console.log(" file "+req.files.imageUrl.name);
-    var file_name = req.files.imageUrl.name;
-  /*  if (file_name.type != 'image/png' && file_name.type != 'image/jpeg'){
-    	console.log('Not image file');
-        return res.redirect('/user/'+user_id+'/edit_profile');
-      }*/
-    var upload_dir = ('./uploads/'+ file_name);
-    console.log(upload_dir);
-    var params = {
-        //localFile: "/Users/sophiango/Downloads/icon.jpg",
-        localFile: upload_dir,
+        console.log(" file "+req.files.imageUrl.name);
+        var file_name = req.files.imageUrl.name;
+        /*  if (file_name.type != 'image/png' && file_name.type != 'image/jpeg'){
+         console.log('Not image file');
+         return res.redirect('/user/'+user_id+'/edit_profile');
+         }*/
+        var upload_dir = ('./uploads/'+ file_name);
+        console.log(upload_dir);
+        var params = {
+            //localFile: "/Users/sophiango/Downloads/icon.jpg",
+            localFile: upload_dir,
 
-        s3Params: {
-            Bucket: "mini-linkedin",
-            Key: file_name
-            // other options supported by putObject, except Body and ContentLength.
-            // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
-        }
-    };
-    var uploader = client.uploadFile(params);
-    uploader.on('error', function(err) {
-        console.error("unable to upload:", err.stack);
-    });
-    uploader.on('progress', function() {
-        console.log("progress", uploader.progressMd5Amount,
-            uploader.progressAmount, uploader.progressTotal);
-    });
-    uploader.on('end', function() {
-        console.log("done uploading");
-    });
+            s3Params: {
+                Bucket: "mini-linkedin",
+                Key: file_name
+                // other options supported by putObject, except Body and ContentLength.
+                // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
+            }
+        };
+        var uploader = client.uploadFile(params);
+        uploader.on('error', function(err) {
+            console.error("unable to upload:", err.stack);
+        });
+        uploader.on('progress', function() {
+            console.log("progress", uploader.progressMd5Amount,
+                uploader.progressAmount, uploader.progressTotal);
+        });
+        uploader.on('end', function() {
+            console.log("done uploading");
+        });
 
-    link = s3.getPublicUrl('mini-linkedin', file_name ,'us-east-1');
-    console.log(link);
+        link = s3.getPublicUrl('mini-linkedin', file_name ,'us-east-1');
+        console.log(link);
     }
-else{link=req.body.imageUrlHidden;} 
-    
+    else{link=req.body.imageUrlHidden;}
+
     console.log("link "+link);
     User.update({userId:user_id},{$set: {
             firstName : req.body.firstName,
@@ -448,7 +489,7 @@ else{link=req.body.imageUrlHidden;}
 });
 
 router.post('/:user_id/exp',function (req, res) {
-	var userId=req.params.user_id;
+    var userId=req.params.user_id;
     User.findOne({userId:userId},function(err,foundUser) {
         if (err) {
             console.log(err);
@@ -458,9 +499,9 @@ router.post('/:user_id/exp',function (req, res) {
             })
         }
         else {
-        	var cnt= foundUser.experience.length; 
-        	console.log("Reached add ");
-        	console.log("Cnt "+cnt);
+            var cnt= foundUser.experience.length;
+            console.log("Reached add ");
+            console.log("Cnt "+cnt);
             foundUser.experience.push({
                 position: req.body.inputPosition,
                 company: req.body.inputCompany,
@@ -478,12 +519,12 @@ router.post('/:user_id/exp',function (req, res) {
                     })
                 }
                 else{
-                   /* res.render('add_new_exp',{
-                        user_id: User.userId,
-                        message:"Successfully added an experience. You can add more experience or go back to your profile",
-                        err: null
-                    })*/
-                	res.redirect('/user/'+userId);
+                    /* res.render('add_new_exp',{
+                     user_id: User.userId,
+                     message:"Successfully added an experience. You can add more experience or go back to your profile",
+                     err: null
+                     })*/
+                    res.redirect('/user/'+userId);
                 }
             });
         }
@@ -529,18 +570,18 @@ router.post('/:user_id/edit_exp', function (req, res) {
     var user_id = req.params.user_id;
     console.log("req "+req.body);
     return User.findOne({userId: req.params.user_id}, function (err, foundUser) {
-    		foundUser.experience[0].position= req.body.inputPosition;
-            foundUser.experience[0].company= req.body.inputCompany;
-            foundUser.experience[0].from= req.body.inputFrom;
-            foundUser.experience[0].to= req.body.inputTo;
-            foundUser.experience[0].description= req.body.inputDesc;
+        foundUser.experience[0].position= req.body.inputPosition;
+        foundUser.experience[0].company= req.body.inputCompany;
+        foundUser.experience[0].from= req.body.inputFrom;
+        foundUser.experience[0].to= req.body.inputTo;
+        foundUser.experience[0].description= req.body.inputDesc;
         return foundUser.save(function (err) {
             if (!err) {
-               /* res.render('user', {
-                    connection_count: '100',
-                    User: foundUser
-                });*/
-            	res.redirect('/user/'+user_id);
+                /* res.render('user', {
+                 connection_count: '100',
+                 User: foundUser
+                 });*/
+                res.redirect('/user/'+user_id);
             } else {
                 console.log(err);
             }
@@ -549,7 +590,7 @@ router.post('/:user_id/edit_exp', function (req, res) {
 });
 
 router.post('/:user_id/edu',function (req, res) {
-	var userId=req.params.user_id;
+    var userId=req.params.user_id;
     User.findOne({userId:userId},function(err,foundUser) {
         if (err) {
             console.log(err);
@@ -559,11 +600,11 @@ router.post('/:user_id/edu',function (req, res) {
             })
         }
         else {
-        	var cnt= foundUser.education.length; 
-        	console.log("Reached add ");
-        	console.log("Cnt "+cnt);
+            var cnt= foundUser.education.length;
+            console.log("Reached add ");
+            console.log("Cnt "+cnt);
             foundUser.education.push({
-            	id:cnt+1,
+                id:cnt+1,
                 institution: req.body.inputSchool,
                 degree: req.body.inputDegree,
                 fromYear: req.body.inputFrom,
@@ -576,16 +617,16 @@ router.post('/:user_id/edu',function (req, res) {
                         message:null,
                         err: "Cannot add new institution"
                     })
-                	
-                	
+
+
                 }
                 else{
                     /*res.render('add_new_edu',{
-                        user_id: User.userId,
-                        message:"Successfully added an institution. You can add more institution or go back to your profile",
-                        err: null
-                    })*/
-                	res.redirect('/user/'+userId);
+                     user_id: User.userId,
+                     message:"Successfully added an institution. You can add more institution or go back to your profile",
+                     err: null
+                     })*/
+                    res.redirect('/user/'+userId);
                 }
             });
         }
@@ -628,17 +669,17 @@ router.get('/:user_id/edit_edu',function (req, res) {
 });
 
 router.post('/:user_id/edit_edu', function (req, res) {
-	console.log("Re body "+req.body.inputDegree);
+    console.log("Re body "+req.body.inputDegree);
     var user_id = req.params.user_id;
-     User.findOne({userId: req.params.user_id}, function (err, foundUser) {
-            foundUser.education[0].institution= req.body.inputSchool;
-            foundUser.education[0].degree= req.body.inputDegree;
-            foundUser.education[0].fromYear= req.body.inputFrom;
-            foundUser.education[0].toYear= req.body.inputTo;
-         foundUser.save(function (err) {
+    User.findOne({userId: req.params.user_id}, function (err, foundUser) {
+        foundUser.education[0].institution= req.body.inputSchool;
+        foundUser.education[0].degree= req.body.inputDegree;
+        foundUser.education[0].fromYear= req.body.inputFrom;
+        foundUser.education[0].toYear= req.body.inputTo;
+        foundUser.save(function (err) {
             if (!err) {
                 res.redirect('/user/'+user_id);
-                
+
             } else {
                 console.log(err);
                 res.render('index',{
