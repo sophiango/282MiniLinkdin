@@ -295,8 +295,13 @@ router.get('/:user_id/recommendUser',function(req,res){
     UserRecommend.find({userId:req.params.user_id},function(err,result) {
         if (err) {
             console.log(err);
+            res.render('recommendUsers', {
+                result: null,
+                errMsg: "No recommend user found for this user"
+            })
         }
         else {
+            console.log("result: " + result);
             var rec1 = result[0].recommendId;
             var rec2 = result[1].recommendId;
             var rec3 = result[2].recommendId;
@@ -321,23 +326,23 @@ router.get('/:user_id/recommendUser',function(req,res){
     });
 });
 
-router.get('/:user_id/test',function(req,res){
-    console.log("Testing");
-    var recommend = new JobRecommend({
-        position1: 0,
-        position2: "test",
-        position3: "test",
-        position4: "test"
-    });
-    recommend.save(function(err,res){
-        if (err) {
-            console.log(err);
-        }
-        else{
-            console.log(res);
-        }
-    })
-});
+//router.get('/:user_id/test',function(req,res){
+//    console.log("Testing");
+//    var recommend = new JobRecommend({
+//        position1: 0,
+//        position2: "test",
+//        position3: "test",
+//        position4: "test"
+//    });
+//    recommend.save(function(err,res){
+//        if (err) {
+//            console.log(err);
+//        }
+//        else{
+//            console.log(res);
+//        }
+//    })
+//});
 
 router.get('/:user_id/recommendCareer',function(req,res){
     console.log("recommend career");
@@ -350,6 +355,10 @@ router.get('/:user_id/recommendCareer',function(req,res){
             JobRecommend.find({position1: foundUser.headlineId},function(err,foundRec){
                 if(err){
                     console.log(err);
+                    res.render('career_path',{
+                        foundRec : null,
+                        foundUser : foundUser
+                    })
                 }
                 else{
                     console.log(foundRec);
@@ -360,22 +369,6 @@ router.get('/:user_id/recommendCareer',function(req,res){
                 }
             });
         }
-
-        //if (err) {
-        //    console.log(err);
-        //    res.render('index', {
-        //        User: foundUser,
-        //        message: null,
-        //        err: 'Cannot find user'
-        //    })
-        //}
-        //else {
-        //    res.render('career_path', {
-        //        User: foundUser,
-        //        message: null,
-        //        err: null
-        //    })
-        //}
     });
 });
 
