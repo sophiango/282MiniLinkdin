@@ -8,33 +8,43 @@
             <div class="well well-sm">
                 <div class="media">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                              <img style="height:140px; width:140px;" src=<%=User.imageUrl%> alt="profile_pic" class="img-circle">
                             <div class="media-body">
                                 <h2><%=User.firstName + " " + User.lastName%></h2>
                                  <h4><em><%=User.headline%></em></h4>
-								
+                                <h4><span class="label label-primary" aria-label="Left Align">Connections<span class="badge"><%=connection_count%></span></span ><h4>
                                 </div>
                         </div>
-                        <div class="col-md-2">
-		                        <form class="form-horizontal" method="get" action="/jobApplications/<%=User.userId%>">
-			                   <button type="submit" class="btn btn-custom-darken">View Jobs Applied</button>
-			            </form>
-			            </div>
-			            <div class="col-md-2">
-  						 <form class="form-horizontal" method="get" action="/connections/<%=User.userId%>">
-			                   <button type="submit" class="btn btn-custom-darken">View My Connections</button>
-			              </form>
-			             </div>
-			             <div class="col-md-2">
-  						 <form class="form-horizontal" method="get" action="/fCompanys/<%=User.userId%>/jobs">
-			                   <button type="submit" class="btn btn-custom-darken">View Job Posted</button>
-			              </form>
-			             </div>
-							<div class="col-md-2">
-  						 <h4><span class="label label-primary" aria-label="Left Align">Connections<span class="badge"><%=connection_count%></span></span ><h4>
-			                </div>
-			            </div>
+                        <div class="col-md-3">
+                            <form class="form-horizontal" method="get" action="/jobApplications/<%=User.userId%>">
+                                <button type="submit" class="btn btn-custom-darken btn-block">View Jobs Applied</button>
+                            </form>
+                            <br>
+                            <form class="form-horizontal" method="get" action="/user/<%=User.userId%>/recommendJob">
+                                <button type="submit" class="btn btn-custom-darken btn-block">Recommend jobs</button>
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                            <form class="form-horizontal" method="get" action="/connections/<%=User.userId%>">
+                                <button type="submit" class="btn btn-custom-darken btn-block">View My Connections</button>
+                            </form>
+                            <br>
+                            <form class="form-horizontal" method="get" action="/user/<%=User.userId%>/recommendUser">
+                                <button type="submit" class="btn btn-custom-darken btn-block">Recommend connection</button>
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                            <form class="form-horizontal" method="get" action="/fCompanys/<%=User.userId%>/jobs">
+                                <button type="submit" class="btn btn-custom-darken btn-block">View Job Posted</button>
+                            </form>
+                            <br>
+                            <form class="form-horizontal" method="get" action="/user/<%=User.userId%>/recommendCareer">
+                                <button type="submit" class="btn btn-custom-darken btn-block">Suggest career path</button>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 			
