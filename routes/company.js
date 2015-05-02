@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var chance = require('chance').Chance();
+var User = require('../models/user');
 var Company = require('../models/company');
 var Job = require('../models/job');
 var model = require('../models/followCompany');
@@ -14,7 +15,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var Company = require('../models/company');
 
 var sessVar;
 var newCompany;
@@ -28,10 +28,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
-	  secret: 'keyboard cat',
-	  resave: true,
-	  saveUninitialized: true
-	}));
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
 
 var sessVar;
 var client = require('../models/s3');
@@ -47,7 +47,7 @@ var myMulter = multer({
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-	var mySesn = req.session.MyID;
+    var mySesn = req.session.MyID;
     res.redirect('/company/'+mySesn+'/home');
 });
 
@@ -97,29 +97,29 @@ router.post('/',function(req,res){
 //});
 
 router.param('comp_id', function(req, res, next, comp_id) {
-	console.log('it works');
-	var mySesn = req.session.MyID;
-	console.log('sessionnnnn checkkk'+mySesn);
-  //  var user_id = req.params.comp_id;
-    
+    console.log('it works');
+    var mySesn = req.session.MyID;
+    console.log('sessionnnnn checkkk'+mySesn);
+    //  var user_id = req.params.comp_id;
+
     console.log('varibaleeee1'+mySesn);
-    
+
     console.log('varibaleeee2'+comp_id);
-    	
-      if(!mySesn || mySesn=='undefined'|| mySesn.toString()!==comp_id)
-    	{
-    	 console.log('u r trapped, my friend');
-    	 res.redirect('/login');
-    	}
+
+    if(!mySesn || mySesn=='undefined'|| mySesn.toString()!==comp_id)
+    {
+        console.log('u r trapped, my friend');
+        res.redirect('/login');
+    }
 
     // continue doing what we were doing and go to the route
-    next(); 
+    next();
 });
 
 router.get('/:comp_id/home', function (req, res) {
-	
-      
-	var comp_id = req.params.comp_id;
+
+
+    var comp_id = req.params.comp_id;
     Company.findOne({companyId:comp_id},function(err,foundCompany){
         if (err || foundCompany === null) {
             console.log(err);
@@ -129,29 +129,31 @@ router.get('/:comp_id/home', function (req, res) {
             });
         }
         else {
-        	       console.log("Image cmo "+foundCompany.imageUrl);
-        	       console.log(foundCompany.status[0]);
-                    var followCompany = model.FollowCompany.build();
-                	                   	
-                	console.log('Got model');
-                	followCompany.retrieveCoutByCompId(comp_id,function(userCount) {
-                		if (userCount) {
-                			console.log(userCount);
-                			 res.render('company',{
-                                 count: userCount , // hardcode count
-                                 Company: foundCompany
-                             });
+            console.log("Image cmo "+foundCompany.imageUrl);
+            console.log(foundCompany.status[0]);
+            var followCompany = model.FollowCompany.build();
 
-                		} else {
-                			 res.render('company',{
-                                 count: 0 , // hardcode count
-                                 Company: foundCompany
-                             });
-                		}
-                	
+            console.log('Got model');
+            followCompany.retrieveCoutByCompId(comp_id,function(userCount) {
+                if (userCount) {
+                    console.log(userCount);
+                    res.render('company',{
+                        count: userCount , // hardcode count
+                        Company: foundCompany,
+                        comp_id : comp_id
+                    });
+
+                } else {
+                    res.render('company',{
+                        count: 0 , // hardcode count
+                        Company: foundCompany,
+                        comp_id : comp_id
+                    });
+                }
+
             });
         }
-        
+
     });
 });
 
@@ -168,7 +170,8 @@ router.get('/:comp_id', function (req, res) {
             console.log(foundCompany);
             res.render('company',{
                 count: '10k' , // hardcode count
-                Company: foundCompany
+                Company: foundCompany,
+                comp_id : comp_id
             })
         }
     })
@@ -183,12 +186,12 @@ router.get('/:comp_id/edit_profile',function (req, res) {
             console.log(err);
         }
         else {
-    res.render('edit_comp_profile',{
-        Company:foundCompany
-    });
+            res.render('edit_comp_profile',{
+                Company:foundCompany
+            });
         }
-});
     });
+});
 
 router.post('/:comp_id/status',function (req, res) {
     console.log("reached");
@@ -196,68 +199,68 @@ router.post('/:comp_id/status',function (req, res) {
     var status = req.body.status_input;
     console.log(comp_id +" "+status );
     if (status){
-    var	now = new Date();
-    Company.update({companyId:comp_id},{$push: {"status": {$each: [{
-    	textPost : status,
-    	created_at : now } ],
+        var	now = new Date();
+        Company.update({companyId:comp_id},{$push: {"status": {$each: [{
+                textPost : status,
+                created_at : now } ],
 
-        // Slice to max of 50 items
-        $slice:-50,
+                // Slice to max of 50 items
+                $slice:-50,
 
-        // Sorted by last_updated_at desc
-        $sort: {'created_at': -1}  
-    }}},
-    function(err,foundUser){
-        if (err) {
-            console.log(err);
-            res.render('index',{
-                message:null,
-                err: 'Cannot edit company'
-            });
-        }
-        else{
-    res.redirect("/company/"+comp_id+"/home");
-        }
-});}
+                // Sorted by last_updated_at desc
+                $sort: {'created_at': -1}
+            }}},
+            function(err,foundUser){
+                if (err) {
+                    console.log(err);
+                    res.render('index',{
+                        message:null,
+                        err: 'Cannot edit company'
+                    });
+                }
+                else{
+                    res.redirect("/company/"+comp_id+"/home");
+                }
+            });}
     else{
-    	res.redirect("/company/:"+comp_id+"/home");
+        res.redirect("/company/:"+comp_id+"/home");
     }
-    });
+});
 
 router.post('/:comp_id/edit_profile',myMulter, function (req, res) {
     var comp_id = req.params.comp_id;
     var link='';
     if(req.files.imageUrl){
-    var file_name = req.files.imageUrl.name;
-    var upload_dir = ('./uploads/'+ file_name);
-    console.log(upload_dir);
-    var params = {
-        //localFile: "/Users/sophiango/Downloads/icon.jpg",
-        localFile: upload_dir,
+        var file_name = req.files.imageUrl.name;
+        var upload_dir = ('./uploads/'+ file_name);
+        console.log(upload_dir);
+        var params = {
+            //localFile: "/Users/sophiango/Downloads/icon.jpg",
+            localFile: upload_dir,
 
-        s3Params: {
-            Bucket: "mini-linkedin",
-            Key: file_name
-            // other options supported by putObject, except Body and ContentLength.
-            // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
-        }
-    };
-    var uploader = client.uploadFile(params);
-    uploader.on('error', function(err) {
-        console.error("unable to upload:", err.stack);
-    });
-    uploader.on('progress', function() {
-        console.log("progress", uploader.progressMd5Amount,
-            uploader.progressAmount, uploader.progressTotal);
-    });
-    uploader.on('end', function() {
-        console.log("done uploading");
-    });
+            s3Params: {
+                Bucket: "mini-linkedin",
+                Key: file_name
+                // other options supported by putObject, except Body and ContentLength.
+                // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
+            }
+        };
+        var uploader = client.uploadFile(params);
+        uploader.on('error', function(err) {
+            console.error("unable to upload:", err.stack);
+        });
+        uploader.on('progress', function() {
+            console.log("progress", uploader.progressMd5Amount,
+                uploader.progressAmount, uploader.progressTotal);
+        });
+        uploader.on('end', function() {
+            console.log("done uploading");
+        });
 
-     link = s3.getPublicUrl('mini-linkedin', file_name ,'us-east-1');
-    console.log(link);}
-    else{link=req.body.imageUrlHidden;} 
-    
+        link = s3.getPublicUrl('mini-linkedin', file_name ,'us-east-1');
+        console.log(link);}
+    else{link=req.body.imageUrlHidden;}
+
     console.log("Body "+req.body.companyName);
     Company.update({companyId:comp_id},{$set: {
             name : req.body.companyName,
@@ -269,7 +272,7 @@ router.post('/:comp_id/edit_profile',myMulter, function (req, res) {
             addressCity:req.body.addressCity,
             addressZipCode:req.body.addressZipCode,
             url:req.body.url,
-            imageUrl:link, 
+            imageUrl:link,
             email:req.body.email
         }},
         function(err,foundUser){
@@ -317,18 +320,18 @@ router.post('/:comp_id/job', function (req, res) {
     if (comp_id < 0) {
         res.status(404).send('Invalid company id');
     }
-   /* var jobId = chance.natural({min: 1, max: 10000}).toString();
-       	      	 
-    	  Id.findOneAndUpdate(
-    	    { prefix: "JOB" },
-    	    { $inc:   { count: 1 } },
-    	    { upsert: true },
-    	    function (err, idDoc) {
-    	    	console.log("idDoc "+idDoc);
-    	     // callback(err, idDoc);
-    	    });
-    
-    	console.log("jobId "+jobId);*/
+    /* var jobId = chance.natural({min: 1, max: 10000}).toString();
+
+     Id.findOneAndUpdate(
+     { prefix: "JOB" },
+     { $inc:   { count: 1 } },
+     { upsert: true },
+     function (err, idDoc) {
+     console.log("idDoc "+idDoc);
+     // callback(err, idDoc);
+     });
+
+     console.log("jobId "+jobId);*/
     var position = req.body.position;
     var description = req.body.description;
     var location = req.body.location;
@@ -339,40 +342,40 @@ router.post('/:comp_id/job', function (req, res) {
         else {
             var company_name = foundCompany.name;
             Id.findOneAndUpdate(
-            	    { prefix: "JOB" },
-            	    { $inc:   { count: 1 } },
-            	    { upsert: true },
-            	    function (err, idDoc) {
-            	    	console.log("idDoc "+idDoc);
-            	    	 var newJob = new Job ({
-            	                jobId : idDoc.count,
-            	                companyId : comp_id,
-            	                company : company_name,
-            	                position : position,
-            	                location: location,
-            	                description : description,
-            	                expires:expires
-            	                //createdAt : Date.now()
-            	            });
-            	            newJob.save(function (err) {
-            	                if (err) {console.log(err);}
-            	                else {
-            	                	var companyJobModel = companyJob.CompanyJob.build({
-            	                		jobId : idDoc.count,
-            	                		companyId : comp_id
-            	                		});
+                { prefix: "JOB" },
+                { $inc:   { count: 1 } },
+                { upsert: true },
+                function (err, idDoc) {
+                    console.log("idDoc "+idDoc);
+                    var newJob = new Job ({
+                        jobId : idDoc.count,
+                        companyId : comp_id,
+                        company : company_name,
+                        position : position,
+                        location: location,
+                        description : description,
+                        expires:expires
+                        //createdAt : Date.now()
+                    });
+                    newJob.save(function (err) {
+                        if (err) {console.log(err);}
+                        else {
+                            var companyJobModel = companyJob.CompanyJob.build({
+                                jobId : idDoc.count,
+                                companyId : comp_id
+                            });
 
-            	                	console.log('Build followCompany');
-            	                	companyJobModel.add(function(success) {
-            	                		res.redirect("/company/"+comp_id+"/home");
-            	                	}, function(err) {
-            	                		res.send(err);
-            	                	});
-            	                	
-            	                }
-            	            });
-            	    });
-           
+                            console.log('Build followCompany');
+                            companyJobModel.add(function(success) {
+                                res.redirect("/company/"+comp_id+"/home");
+                            }, function(err) {
+                                res.send(err);
+                            });
+
+                        }
+                    });
+                });
+
         }
     });
     //new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
@@ -380,18 +383,18 @@ router.post('/:comp_id/job', function (req, res) {
 
 router.get('/:comp_id/jobPost', function (req, res) {
     var comp_id = req.params.comp_id;
-   
+
     if (comp_id < 0 ) {
         res.status(404).send('Invalid company id');
     }
-    
-            res.render('jobPosting',{companyId:comp_id} );
-       
+
+    res.render('jobPosting',{companyId:comp_id} );
+
 });
 
 router.get('/:comp_id/job', function (req, res) {
     var comp_id = req.params.comp_id;
-   
+
     if (comp_id < 0 ) {
         res.status(404).send('Invalid company id');
     }
@@ -416,15 +419,15 @@ router.put('/:comp_id/job/:job_id', function (req, res) {
     newDescription = req.body.description;
 
     Job.update({jobId:job_id},{$set:{position:newPosition,description:newDescription}},
-                function(err,updatedJob){
-                    if (err) console.log(err);
-                    else res.status(200).send('Successfully update a job');
-    })
+        function(err,updatedJob){
+            if (err) console.log(err);
+            else res.status(200).send('Successfully update a job');
+        })
 });
 
 router.post('/:comp_id/delete/job', function (req, res) {
-	console.log("/delete/job");
-    var comp_id = req.body.comapnyId;
+    console.log("/delete/job");
+    var comp_id = req.body.companyId;
     var job_id = req.body.jobId;
     console.log("selected: " + job_id);
     if (comp_id < 0 || job_id < 0){
@@ -433,30 +436,80 @@ router.post('/:comp_id/delete/job', function (req, res) {
     Job.remove({jobId:job_id,comapnyId:comp_id},function(err) {
         if (err) {console.log(err);}
         else {
-        	var companyJobModel = companyJob.CompanyJob.build();
-        	companyJobModel.removeByJobId(job_id,function(jobs) {
-        		if (jobs) {
-        			console.log(jobs);
-        			//res.send("Deleted Successfully");
-        			res.redirect('back');
+            var companyJobModel = companyJob.CompanyJob.build();
+            companyJobModel.removeByJobId(job_id,function(jobs) {
+                if (jobs) {
+                    console.log(jobs);
+                    //res.send("Deleted Successfully");
+                    res.redirect('back');
 
-        		} else {
-        			res.redirect('back');
-        		}
-        	}, function(error) {
-        		res.send(error);
-        	});
-        	}
+                } else {
+                    res.redirect('back');
+                }
+            }, function(error) {
+                res.send(error);
+            });
+        }
     });
 });
 
+
+router.get('/:comp_id/search_candidate',function(req,res){
+    console.log('reached search user '+req.query);
+    var queryParam = req.query;
+    var query=req.query.query;
+
+    if (query!==null) {
+        /* MemcacheClient.get(name, function(err, foundUser) {
+         if (!err) {
+         // Key found, display value
+         res.render('searchUser', {
+         foundUser: foundUser
+         });
+         }
+         else {*/
+        console.log("query: " + query);
+        User.find({firstName: {$regex: new RegExp('^' + query, 'i')}}, function (err, foundUser) {
+            console.log(foundUser);
+            if (err) {
+                console.log(err);
+                res.redirect('index', {
+                    message: null,
+                    err: 'Cannot find user'
+                });
+            }
+            else {
+                res.render('recommendCandidate', {
+                    foundUser: foundUser,
+                    comp_id: req.params.comp_id
+                });
+            }
+        });
+    }
+})
+
+router.get('/:comp_id/recommendCandidate', function (req, res) {
+    var comp_id = req.params.comp_id;
+    res.render('recommendCandidate',{
+        foundUser: null
+    });
+    //Job.find({companyId:comp_id},function(err,jobList){
+    //    if (err ){ console.log("Error" + err);}
+    //    else {
+    //        console.log('Found company: ' + jobList );
+    //        res.render('viewPostedJobs',{jobList:foundJob,companyId:comp_id} );
+    //    }
+    //});
+});
+
 router.post('/:comp_id/recommendCandidate', function (req, res) {
-    var comp_id = req.body.comapnyId;
+    var comp_id = req.params.comp_id;
     var job_id = req.body.jobId;
     console.log("Recommend candidate for job: " + job_id);
     if (comp_id < 0 || job_id < 0){
         res.status(404).send('Invalid company id or job id');
     }
+
 
     // query goes here
     //Job.remove({jobId:job_id,comapnyId:comp_id},function(err) {

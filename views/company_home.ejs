@@ -1,47 +1,47 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <% include header %>
-    <body>
-    <% include company_navbar %>
+<!DOCTYPE html>
+<html lang="en">
+<% include header %>
+<body>
+<% include company_navbar %>
+<div class="container">
+
     <div class="container">
-       
-        <div class="container">
-            <div class="well well-sm">
-                <div class="media">
-                    <div class="row">
-                        <div class="col-md-4">
-                           <img style="height:140px; width:140px;" src=<%=Company.imageUrl%> alt="profile_pic" class="img-circle">
-                            <div class="media-body">
-                                <h4 class="media-heading"><%=Company.name%></h4>
-                                <h4 class="media-heading"><%=Company.description%></h4>
-                                <span><h4 class="media-heading"><strong><%=connection_count%></strong> connections</h4></span>
-                            </div>
+        <div class="well well-sm">
+            <div class="media">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img style="height:140px; width:140px;" src=<%=Company.imageUrl%> alt="profile_pic" class="img-circle">
+                        <div class="media-body">
+                            <h4 class="media-heading"><%=Company.name%></h4>
+                            <h4 class="media-heading"><%=Company.description%></h4>
+                            <span><h4 class="media-heading"><strong><%=connection_count%></strong> connections</h4></span>
                         </div>
-                        <div class="col-md-8">
-                            <textarea class="form-control" name="status_input" rows="3"></textarea>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea class="form-control" name="status_input" rows="3"></textarea>
+                        <br>
+                        <div class="pull-right">
+                            <form class="form-horizontal" method="post" action="/company/<%=Company.companyId%>/status">
+                                <button type="submit" class="btn btn-primary">Post new status</button>
+                            </form>
                             <br>
-                            <div class="pull-right">
-                                <form class="form-horizontal" method="post" action="/company/<%=Company.companyId%>/status">
-                                    <button type="submit" class="btn btn-primary">Post new status</button>
-                                </form>
-                                <br>
-                                <br>
-                                <br>
-                                <form class="form-horizontal" method="get" action="/company/<%=Company.companyId%>/edit_profile">
-                                    <button type="submit" class="btn btn-primary">Edit profile</button>
-                                </form>
-                            </div>
+                            <br>
+                            <br>
+                            <form class="form-horizontal" method="get" action="/company/<%=Company.companyId%>/edit_profile">
+                                <button type="submit" class="btn btn-primary">Edit profile</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!--container!-->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    </body>
-    </html>
+    </div>
+</div> <!--container!-->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
