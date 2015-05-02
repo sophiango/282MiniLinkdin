@@ -1,0 +1,62 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <% include header %>
+    <body>
+    <% include profile_navbar %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <div class="container">
+     <p class="bg-danger"><%=errMsg%></p>
+ <form class="form-horizontal" method="post" action="/connections" id="newForm" >
+        <div class="container">
+         
+             <div class="row" id="users">
+             <div class="row">
+             <div class="col-md-8">
+			 <h3><span class="label label-default">Users who related to you</span></h3>
+			 </div>
+			 <div class="col-md-2">
+        <br>
+			<span> <button type="submit" class="btn btn-custom-darken">Add as a Connection</button></span>
+			 </div>
+			 </div>
+			 <br>
+			 <% for(var i=0; i< foundUser.length; i++) {%>
+			  <div class="row" >
+			<div class="col-md-8">
+			<div class="panel panel-default">
+			 <div class="panel-heading">
+<h3 class="panel-title"><label ><%=foundUser[i].firstName%> <%=foundUser[i].lastName%></label></h3>
+</div>
+<div class="panel-body">
+<table class="table">
+<tbody>
+<tr>
+<td><span><img style="height:140px; width:140px;"  src=<%=foundUser.imageUrl%> alt="profile_pic" class="img-circle"></span> </td>
+<td><span id="description"><%=foundUser[i].headline%></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+  <div class="checkbox" class="col-md-2">
+    <label>
+      <input type="radio" name="connectionId" id="blankRadio1" aria-label="..." value=<%=foundUser[i].userId%>>
+      select
+       </label>
+  </div>
+  </div>
+<br>
+ <%}%>
+ </div>
+</div>
+ </div>
+ </form> <!--container!-->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </body>
+    </html>

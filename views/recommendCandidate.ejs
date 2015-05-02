@@ -1,0 +1,87 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <% include header %>
+    <body>
+    <% include company_navbar %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <div class="container">
+        
+        <div class="container">
+            <div class="well well-sm">
+                <div class="media">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+			 <form class="form-horizontal" method="post" action="/<%=companyId%>/recommendCandidate">
+			 <input type="hidden" name="companyId" id="companyId" value="<%=companyId%>" />
+			 <div class="row" id="jobsApplied">
+			
+			 <% if (jobList) {%>
+			  
+			<div class="row">
+             <div class="col-md-8">
+			 <h3><span class="label label-default">Jobs Posted</span></h3>
+			 </div>
+			 <div class="col-md-2">
+			<span> <button type="submit" class="btn btn-custom-darken">Recommend candidates</button></span>
+			 </div>
+			 </div>
+			 
+			 <% for(var i=0; i< jobList.length; i++) {%>
+			 <div class="row" >
+			 <div class="col-md-8">
+			<div class="panel panel-default">
+			 <div class="panel-heading">
+<h3 class="panel-title"><label ><%=jobList[i].position%></label></h3>
+</div>
+<div class="panel-body">
+<table class="table">
+<tbody>
+<tr>
+<td><span><label >Description </label></span> </td>
+<td><span id="description"><%=jobList[i].description%></span></td>
+</tr>
+<tr>
+<td><span><label >Location </label></span> </td>
+<td><span id="location"><%=jobList[i].location%></span></td>
+</tr>
+<tr>
+<td><span><label>Expires </label></span> </td>
+<td><span id="expires"><%=moment(jobList[i].expires).format(shortDateFormat)%></span></td>
+</tr>
+<tr>
+<td><span><label >Id </label></span> </td>
+<td><span id="id"><%=jobList[i].jobId%></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<br>
+ 
+  <div class="checkbox" class="col-md-2">
+    <label>
+      <input type="radio" name="jobId" id="blankRadio1" aria-label="..." value=<%=jobList[i].jobId%>>
+      delete
+     </label>
+  </div>
+  </div>
+
+  <%}%>
+ <%} else {%>
+  <h3><span class="label label-default">No job recommend</span></h3>
+  <%}%>
+
+</form>
+</div>
+ </div> <!--container!-->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </body>
+    </html>

@@ -4,6 +4,7 @@ var chance = require('chance').Chance();
 var User = require('../models/user');
 var Company = require('../models/company');
 var Job = require('../models/job');
+var UserRecommend = require('../models/UserRecommend');
 var model = require('../models/followUser');
 var followCompanyModel = require('../models/followCompany');
 var loginmodel = require('../models/login');
@@ -262,7 +263,7 @@ router.get('/:user_id/recommendJob',function(req,res){
             })
         }
         else {
-            res.render('career_path', {
+            res.render('recommendJobs', {
                 User: foundUser,
                 message: null,
                 err: null
@@ -271,22 +272,49 @@ router.get('/:user_id/recommendJob',function(req,res){
     });
 });
 
-router.get('/:user_id/recommendUser',function(req,res){
-    User.findOne({userId:req.params.user_id},function(err,foundUser) {
+router.get('/:user_id/test',function(req,res){
+    console.log("Testing");
+    var recommend = new UserRecommend({
+        userId: req.params.user_id,
+        recommendId: 15
+    });
+    recommend.save(function(err,res){
         if (err) {
             console.log(err);
-            res.render('index', {
-                User: foundUser,
-                message: null,
-                err: 'Cannot find user'
-            })
+        }
+        else{
+            console.log(res);
+        }
+    })
+});
+
+router.get('/:user_id/recommendUser',function(req,res){
+    var recommend_user_list = [];
+    UserRecommend.find({userId:req.params.user_id},function(err,result) {
+        if (err) {
+            console.log(err);
         }
         else {
-            res.render('career_path', {
-                User: foundUser,
-                message: null,
-                err: null
-            })
+            var rec1 = result[0].recommendId;
+            var rec2 = result[1].recommendId;
+            var rec3 = result[2].recommendId;
+
+            User.find({'$or':[{userId:rec1},{userId:rec2},{userId:rec3}]},function(err,foundUser) {
+                if (err) {
+                    console.log(err);
+                    res.render('recommendUsers', {
+                        foundUser: null,
+                        errMsg: "No recommend user found for this user"
+                    })
+                }
+                else{
+                    console.log("Recommend users: " + foundUser);
+                    res.render('recommendUsers', {
+                        foundUser: foundUser,
+                        errMsg: null
+                    })
+                }
+            });
         }
     });
 });

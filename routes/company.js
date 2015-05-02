@@ -404,6 +404,7 @@ router.get('/:comp_id/job', function (req, res) {
     });
 });
 
+
 router.put('/:comp_id/job/:job_id', function (req, res) {
     var comp_id = req.params.comp_id;
     var job_id = req.params.job_id;
@@ -425,6 +426,7 @@ router.post('/:comp_id/delete/job', function (req, res) {
 	console.log("/delete/job");
     var comp_id = req.body.comapnyId;
     var job_id = req.body.jobId;
+    console.log("selected: " + job_id);
     if (comp_id < 0 || job_id < 0){
         res.status(404).send('Invalid company id or job id');
     }
@@ -446,6 +448,35 @@ router.post('/:comp_id/delete/job', function (req, res) {
         	});
         	}
     });
+});
+
+router.post('/:comp_id/recommendCandidate', function (req, res) {
+    var comp_id = req.body.comapnyId;
+    var job_id = req.body.jobId;
+    console.log("Recommend candidate for job: " + job_id);
+    if (comp_id < 0 || job_id < 0){
+        res.status(404).send('Invalid company id or job id');
+    }
+
+    // query goes here
+    //Job.remove({jobId:job_id,comapnyId:comp_id},function(err) {
+    //    if (err) {console.log(err);}
+    //    else {
+    //        var companyJobModel = companyJob.CompanyJob.build();
+    //        companyJobModel.removeByJobId(job_id,function(jobs) {
+    //            if (jobs) {
+    //                console.log(jobs);
+    //                //res.send("Deleted Successfully");
+    //                res.redirect('back');
+    //
+    //            } else {
+    //                res.redirect('back');
+    //            }
+    //        }, function(error) {
+    //            res.send(error);
+    //        });
+    //    }
+    //});
 });
 
 module.exports = router;
