@@ -14,7 +14,7 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <form method="post" action="/user/<%=user_id%>/edit_exp" class="form-horizontal">
+    <form method="post" action="/user/<%=user_id%>/edit_edu" class="form-horizontal">
         <div id="user_profile">
             <center>
                 <h4>Editing education</h4>
@@ -26,23 +26,29 @@
                                 <label for="position">Institution: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputSchool" placeholder="Input school name" required="required">
+                                <input type="text" class="form-control" name="inputSchool" required="required"  value=<%=User.education[i].institution%>>
                             </div>
                         </div>
                         <div class="form-group required">
                             <div class="col-lg-2 control-label">
-                                <label for="position">Company: </label>
+                                <label for="position">Degree: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputDegree" placeholder="Input degree" required="required" >
+                                <input type="text" class="form-control" name="inputDegree"  required="required" value=<%=User.education[i].degree%> >
                             </div>
                         </div>
                         <div class="form-group required">
-                            <div class="col-lg-3 col-xs-2">
-                                <input type="text" class="form-control" name="inputFrom" placeholder="From" required="required">
+                        	<div class="col-lg-2 control-label">
+                                <label for="position">From Date: </label>
                             </div>
                             <div class="col-lg-3 col-xs-2">
-                                <input type="text" class="form-control" name="inputTo" placeholder="To" required="required">
+                                <input type="text" class="form-control" name="inputFrom" placeholder="From" required="required" value=<%=User.education[i].fromYear%>>
+                            </div>
+                            <div class="col-lg-2 control-label">
+                                <label for="position">To Date: </label>
+                            </div>
+                            <div class="col-lg-3 col-xs-2">
+                                <input type="text" class="form-control" name="inputTo" placeholder="To" required="required" value=<%=User.education[i].toYear%>>
                             </div>
                         </div>
                     </div>

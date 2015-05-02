@@ -3,27 +3,82 @@
 <% include header %>
 <body>
 <% include company_navbar %>
-<div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">About</a></li>
-                <li role="presentation"><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-        <h3 class="text-muted">Project name</h3>
+<link rel="stylesheet" type="text/css" href='/stylesheets/style.css'/>
+
+    <div class="row">
+	<div class="col-md-4">
+    <br>
+	<address>
+	 <strong>Address</strong><br>
+   <%=Company.addressLine1%><br>
+ <%= Company.addressLine2 ? Company.addressLine2 : ""%><wbr>
+   <%= Company.addressCity ? Company.addressCity : ""%>,  <%= Company.addressState ? Company.addressState : ""%> <%= Company.addressZipCode ? Company.addressZipCode : ""%><br>
+   <strong> <%= Company.addressCountry ? Company.addressCountry : ""%> </strong><br>
+    <a href="mailto:#"><%=Company.email%></a>
+  </address>
+	</div>
+        
+	<div class="col-md-4">
+	 <center>
+		<img style="height:140px; width:240px;" src=<%=Company.imageUrl%> alt="company_logo" class="img-circle">
+		<h2><%=Company.name%></h2>
+		<h2><%=Company.status[i]%></h2>
+		<em><%=Company.subLine%></em>
+		</center>
+	</div>
+	<div class="col-md-2 col-md-offset-2">		
+        <h2> <span class="label label-primary" aria-label="Left Align">following<span class="badge"><%=count%></span> </span ><h2>
+	</div>
+	</div>
+	 <div class="row">
+	 <div class="col-md-3">
+	 <button type="button" class="btn btn-custom-darken" data-toggle="modal" data-target="#myModal">
+  View Company Description
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%=Company.name%></h4>
+      </div>
+      <div class="modal-body">
+       <%=Company.description%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom-darken" data-dismiss="modal">Close</button>
+      </div>
     </div>
-    <div>
-        <!--<div id="user_profile" class="col-md-8">-->
-        <center>
-            <img src=<%=Company.imageUrl%> alt="company_logo" class="img-thumbnail">
-            <h2><%=Company.name%></h2>
-            <em><%=Company.subLine%></em>
-            <label><%=count%> followers</label>
-            <br>
-            <button class="btn btn-default">Follow</button>
-        </center>
+  </div>
+</div>
+	 </div>
+	 <div class="col-md-6">
+	 <form method="post" action="/company/<%=Company.companyId%>/status">
+            <textarea class="form-control" name="status_input" rows="3"></textarea>
+            <button type="submit" class="btn btn-custom-darken">Post new status</button>
+     </form>
+	 </div>
+	 <div class="col-md-2 col-md-offset-1">
+	 <form class="form-horizontal" method="get" action="/company/<%=Company.companyId%>/edit_profile">
+                <button type="submit" class="btn btn-custom-darken">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true">EditProfile</span>
+                </button>
+      </form>
+	  <br>
+	   <form class="form-horizontal" method="get" action="/company/<%=Company.companyId%>/jobPost">
+                 <button type="submit" class="btn btn-custom-darken">Post Jobs </button>
+        </form>
+		<br>
+		<form class="form-horizontal" method="get" action="/company/<%=Company.companyId%>/job">
+                 <button type="submit" class="btn btn-custom-darken">View Posted Jobs </button>
+        </form>	
+ </div>		
+	 </div>
+	 
+            
+    
         <!--</div>-->
         <!--<div class="col-md-4">-->
             <!--<form class="form-horizontal" method="get" action="/company/<Company.companyId>/edit_profile">-->
@@ -36,26 +91,34 @@
         <!--</div>-->
     </div>
 
-    <hr>
-    <!-- THIS IS THE JOB LISTING. AS JOB IS NOT STORED UNDER COMPANY, YOU WILL HAVE TO GET IT FROM RDS. PLEASE NOTICE THAT I HAVE REMOVE
-    ALL THE SYMBOLS % SO THAT I CAN COMMENT OUT THE SECTION. ADD THEM ACCORDINGLY. FOR EXAMPLE, BEFORE =Company., add %=Company.
-    <for (var i = 0; i < Company.jobs.length; i++) {>
-    <div class="row">
-        <div class="col-md-2">
-            <img class="img-thumbnail" src=<=Company.imageUrl> alt="logo_company_one">
-        </div>
-        <div class="col-md-8">
-            <h3><=Company.jobs[i].position></h3>
-            <h5><=Company.jobs[i].company></h5>
-            <h5><=Company.jobs[i].location></h5>
-            <em><=Company.jobs[i].createAt></em>
-            <p><=Company.jobs[i].description></p>
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-primary" href="#">View Job <span class="glyphicon glyphicon-chevron-right"></span></a>
-        </div>
+  
+   
+   
+   <div class="row">
+    <div class="col-md-6 col-md-offset-2">
     </div>
-    <}>
+   </div>
+    <div class="row">
+	
+         <div class="col-md-6 col-md-offset-3">
+         <div class="panel">
+  <div class="panel-heading my-panel-heading ">
+    <div class="panel-title" text-alig="center">Recent Post</div>
+  </div>
+  </div>
+   <%for (var i = 0; i < Company.status.length; i++) {%>
+		 <div class="panel panel-default">
+  <div class="panel-body">
+    <%=Company.status[i].textPost%>
+  </div>
+  <div class="label label-default">created at <%=moment(Company.status[i].created_at).format(shortDateFormat) %></div>
+ </div>
+  
+  <%}%>
+          </div>
+		
+    </div>
+    
 
     <div class="row text-center">
         <div class="col-lg-12">
@@ -66,39 +129,42 @@
                 <li class="active">
                     <a href="#">1</a>
                 </li>
-                <if(Company.jobs.length > 20) {>
+                <%if(Company.status.length > 20) {%>
                 <li>
                     <a href="#">2</a>
                 </li>
-                <}>
-                <if(Company.jobs.length > 30) {>
+                <%}%>
+                <%if(Company.status.length > 30) {%>
                 <li>
                     <a href="#">3</a>
                 </li>
-                <}>
-                <if(Company.jobs.length > 40) {>
+                <%}%>
+                <%if(Company.status.length > 40) {%>
                 <li>
                     <a href="#">4</a>
                 </li>
-                <}>
-                <if(Company.jobs.length > 50) {>
+                <%}%>
+                <%if(Company.status.length > 50) {%>
                 <li>
                     <a href="#">5</a>
                 </li>
-                <}>
+                <%}%>
                 <li>
                     <a href="#">&raquo;</a>
                 </li>
             </ul>
         </div>
     </div>
-    -->
-    <!-- /.row -->
+   
 
     <hr>
 
     <!-- Footer -->
-    <footer>
+    
+
+</div> <!--container!-->
+
+<footer>
         <div class="row">
             <div class="col-lg-12">
                 <p>Copyright &copy; Your Website 2014</p>
@@ -107,15 +173,16 @@
         <!-- /.row -->
     </footer>
 
-</div> <!--container!-->
 <script type="text/javascript">
     $(document).ready(function() {
         $('#home').addClass("active");
+		alert(Company.status.length);
     });
 </script>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<link rel='stylesheet' href='stylesheets/style.css' />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

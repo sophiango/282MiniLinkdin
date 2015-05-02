@@ -17,16 +17,16 @@
     <form method="post" action="/user/<%=user_id%>/edit_exp" class="form-horizontal">
         <div id="user_profile">
             <center>
-                <h4>Editing experience</h4>
+                <h4><b>Editing experience</b></h4>
                 <div class="row" id="experience">
                     <% for(var i=0; i< User.experience.length; i++) {%>
                     <div>
                         <div class="form-group">
                             <div class="col-lg-2 control-label">
-                                <label for="position">Position: </label>
+                                <label for="position">Position <%=i+1%>: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" placeholder=<%=User.experience[i].position%>>
+                                <input type="text" class="form-control" name="inputPosition" value=<%=User.experience[i].position%>>
                             </div>
                         </div>
                         <div class="form-group">
@@ -34,15 +34,21 @@
                                 <label for="position">Company: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" placeholder=<%=User.experience[i].company%> >
+                                <input type="text" class="form-control" name="inputCompany" value=<%=User.experience[i].company%> >
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-3 col-xs-2">
-                                <input type="text" class="form-control" placeholder=<%=User.experience[i].from%>>
+                            <div class="col-lg-2 control-label">
+                              <label for="position">From Date: </label>
+                            </div>
+                             <div class="col-lg-3 col-xs-2">
+                                <input type="text" class="form-control" name="inputFrom" value=<%=User.experience[i].from%>>
+                            </div>
+                            <div class="col-lg-2 col-xs-2" control-label">
+                              <label for="position">To Date	: </label>
                             </div>
                             <div class="col-lg-3 col-xs-2">
-                                <input type="text" class="form-control" placeholder=<%=User.experience[i].to%>>
+                                <input type="text" class="form-control" name="inputTo" value=<%=User.experience[i].to%>>
                             </div>
                         </div>
                         <div class="form-group">
@@ -50,10 +56,11 @@
                                 <label for="position">Description: </label>
                             </div>
                             <div class="col-lg-10">
-                                <textarea class="form-control" rows="3"><%=User.experience[i].description%></textarea>
+                                <textarea class="form-control" rows="3" name="inputDesc"><%=User.experience[i].description%></textarea>
                             </div>
                         </div>
                     </div>
+                    <br>
                     <%}%>
                 </div>
             </center>

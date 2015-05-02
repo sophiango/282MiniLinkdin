@@ -19,7 +19,7 @@
     <br>
 
  <center><h3>Log in</h3></center>
-    <form class="form-horizontal" method="get" action="/user/:user_id">
+    <form class="form-horizontal" method="post">
         <div class="form-group required">
             <div class="col-lg-2 control-label">
                 <label>Email: </label>
@@ -40,10 +40,10 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" name="userLogin" value="option1"> User
+                    <input type="radio" name="inlineRadioOptions" name="userLogin" value="option1" required="required"> User
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" name="companyLogin" value="option2"> Company
+                    <input type="radio" name="inlineRadioOptions" name="companyLogin" value="option2" required="required"> Company
                 </label>
             </div>
         </div>

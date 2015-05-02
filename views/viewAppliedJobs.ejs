@@ -1,0 +1,55 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <% include header %>
+    <body>
+   <% include profile_navbar %>
+    <div class="container">
+        
+
+        <div class="container">
+            
+             <div class="row" id="jobsApplied">
+             <h3><span class="label label-default">Jobs Applied</span></h3>
+             <br>
+             <% for(var i=0; i< jobList.length; i++) {%>
+            <div class="panel panel-default">
+             <div class="panel-heading">
+<h3 class="panel-title"><label ><%=jobList[i].position%></label></h3>
+</div>
+<div class="panel-body">
+<table class="table">
+<tbody>
+<tr>
+<td><span><label >Description </label></span> </td>
+<td><span id="description"><%=jobList[i].description%></span></td>
+</tr>
+<tr>
+<td><span><label >Company </label></span> </td>
+<td><span id="company"><%=jobList[i].company%></span></td>
+</tr>
+<tr>
+<td><span><label >Location </label></span> </td>
+<td><span id="location"><%=jobList[i].location%></span></td>
+</tr>
+<tr>
+<td><span><label >Id </label></span> </td>
+<td><span id="id"><%=jobList[i].jobId%></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+ <%}%>
+</div>
+<br>
+
+</div>
+ </div> <!--container!-->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </body>
+    </html>

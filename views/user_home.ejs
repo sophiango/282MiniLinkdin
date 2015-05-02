@@ -3,33 +3,100 @@
     <% include header %>
     <body>
     <% include profile_navbar %>
-    <div class="container">
-        <div class="header clearfix">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="index.ejs">Home</a></li>
-                    <li role="presentation"><a href="#">About</a></li>
-                    <li role="presentation"><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-            <h3 class="text-muted">Project name</h3>
-        </div>
-
+	<link rel='stylesheet' href='/stylesheets/style.css' />
         <div class="container">
             <div class="well well-sm">
                 <div class="media">
                     <div class="row">
                         <div class="col-md-4">
-                            <img class="media-object" src=<%=User.imageUrl%>>
+                             <img style="height:140px; width:140px;" src=<%=User.imageUrl%> alt="profile_pic" class="img-circle">
                             <div class="media-body">
-                                <h4 class="media-heading"><%=User.firstName + " " + User.lastName%></h4>
-                                <h4 class="media-heading"><%=User.headline%></h4>
-                                <span><h4 class="media-heading"><strong><%=connection_count%></strong> connections</h4></span>
-                            </div>
+                                <h2><%=User.firstName + " " + User.lastName%></h2>
+                                 <h4><em><%=User.headline%></em></h4>
+								
+                                </div>
                         </div>
-                    </div>
+                        <div class="col-md-2">
+		                        <form class="form-horizontal" method="get" action="/jobApplications/<%=User.userId%>">
+			                   <button type="submit" class="btn btn-custom-darken">View Jobs Applied</button>
+			            </form>
+			            </div>
+			            <div class="col-md-2">
+  						 <form class="form-horizontal" method="get" action="/connections/<%=User.userId%>">
+			                   <button type="submit" class="btn btn-custom-darken">View My Connections</button>
+			              </form>
+			             </div>
+			             <div class="col-md-2">
+  						 <form class="form-horizontal" method="get" action="/fCompanys/<%=User.userId%>/jobs">
+			                   <button type="submit" class="btn btn-custom-darken">View Job Posted</button>
+			              </form>
+			             </div>
+							<div class="col-md-2">
+  						 <h4><span class="label label-primary" aria-label="Left Align">Connections<span class="badge"><%=connection_count%></span></span ><h4>
+			                </div>
+			            </div>
                 </div>
             </div>
+			
+		 
+   <%for (var i = 0; i < fComapanyList.length; i++) {%>
+   <div class="row">
+  <div class="col-md-2">
+    <img src=<%=fComapanyList[i].imageUrl%> alt="company_logo" class="img-thumbnail">
+	</div>
+	 <h2><%=fComapanyList[i].name%></h2>
+  </div>
+		 <div class="panel panel-default">
+  <div class="panel-body">
+    <%=fComapanyList[i].status[0].textPost%>
+  </div>
+  <div class="label label-default">Posted at <%=moment(fComapanyList[i].status[0].created_at).format(shortDateFormat) %></div>
+ </div>
+  
+  <%}%>
+          </div>
+		
+    </div>
+    
+
+    <div class="row text-center">
+        <div class="col-lg-12">
+            <ul class="pagination">
+                <li>
+                    <a href="#">&laquo;</a>
+                </li>
+                <li class="active">
+                    <a href="#">1</a>
+                </li>
+                <%if(fComapanyList.length > 5) {%>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <%}%>
+                <%if(fComapanyList.length > 10) {%>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <%}%>
+                <%if(fComapanyList.length > 20) {%>
+                <li>
+                    <a href="#">4</a>
+                </li>
+                <%}%>
+                <%if(fComapanyList.length > 15) {%>
+                <li>
+                    <a href="#">5</a>
+                </li>
+                <%}%>
+                <li>
+                    <a href="#">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+   
+
+   
         </div>
 
         <!--<div>-->
@@ -47,7 +114,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var educationSchema = new mongoose.Schema({
+	id:Number,
     institution: String,
     degree: String,
     fromYear: String,
@@ -8,6 +9,7 @@ var educationSchema = new mongoose.Schema({
 },{ _id : false });
 
 var experienceSchema = new mongoose.Schema({
+	id:Number,
     position: String,
     company: String,
     from: String,

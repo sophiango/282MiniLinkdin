@@ -18,13 +18,13 @@
     <p class="bg-danger"><%=err%></p>
     <br>
  <center><h3>Sign up</h3></center>
-    <form class="form-horizontal" method="post" action="/company">
+    <form class="form-horizontal" method="post" action="/signupComp">
         <div class="form-group required">
             <div class="col-lg-2 control-label">
                 <label>Email: </label>
             </div>
             <div class="col-lg-10">
-                <input type="email" class="form-control" name="inputEmail" placeholder="Input email" required="required">
+                <input type="email" class="form-control" name="email" placeholder="Input email" required="required">
             </div>
         </div>
         <div class="form-group required">
@@ -32,7 +32,7 @@
                 <label>Company name: </label>
             </div>
             <div class="col-lg-10">
-                <input type="text" class="form-control" name="inputCompName" placeholder="Input Company name" required="required">
+                <input type="text" class="form-control" name="compName" placeholder="Input Company name" required="required">
             </div>
         </div>
         <div class="form-group required">

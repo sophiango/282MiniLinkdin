@@ -17,12 +17,20 @@ var companySchema = new mongoose.Schema({
     companyId : {type : String , required : true, unique: true, dropDups: true},
     name : {type : String , required : true, unique: true, dropDups: true},
     email: {type : String , required : true, unique: true, dropDups: true},
-    //address: String,
-    //url: String,
+    addressLine1: {type : String },
+    addressLine2: {type : String},
+    addressLine3: {type : String},
+    addressCountry: {type : String },
+    addressState:{type : String},
+    addressCity:{type : String},
+    addressZipCode:{type : String},
+    url: String,
     imageUrl : String,
     //parentCompanyId: String,
     description: String,
-    status: [statusSchema]
+    status: [{textPost: {type : String },
+    	     created_at: { type: Date }}]
+    
     //jobs: [{
     //    jobId: String,
     //    title: String,

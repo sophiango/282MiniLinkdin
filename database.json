@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "driver": "mysql",
+    "user": "cmpe282",
+    "database": "cmpe282",
+    "password": "cmpe282link",
+    "host":"linkedin.canshi67aaya.us-west-1.rds.amazonaws.com"
+  },
+ 
+  "production": {
+    "driver": "mysql",
+    "user": "root",
+    "database": "myapp"
+  }
+}

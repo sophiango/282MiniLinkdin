@@ -1,0 +1,42 @@
+CREATE TABLE JobApplication (userId VARCHAR(40), jobId VARCHAR(40),companyId VARCHAR(40));
+insert into JobApplication values ('001','001','001');
+
+select * from JobApplication;
+
+CREATE TABLE FollowCompany (userId VARCHAR(40),companyId VARCHAR(40));
+
+http://codeforgeek.com/2015/01/nodejs-mysql-tutorial/
+
+ALTER TABLE Persons
+ADD CONSTRAINT uc_PersonID UNIQUE (P_Id,LastName)	
+
+5929 jobId
+54882 companyId
+
+SET SQL_SAFE_UPDATES = 0;
+CREATE TABLE JobApplication (userId VARCHAR(40), jobId VARCHAR(40),companyId VARCHAR(40));
+
+insert into JobApplication values ('001','001','001');
+
+select * from JobApplication;
+
+update JobApplication set jobId="5489" where companyId="54882" and jobId="5929"
+
+CREATE TABLE FollowCompany (userId VARCHAR(40),companyId VARCHAR(40));
+
+ALTER TABLE JobApplication
+ADD CONSTRAINT uc_JobApplication UNIQUE (userId,jobId,companyId)
+
+CREATE TABLE FollowUser (userId VARCHAR(40), connectionId VARCHAR(40));
+
+delete from  FollowUser where userId <> "002"
+select * from FollowUser;
+
+delete from FollowUser
+
+commit
+
+SET SQL_SAFE_UPDATES = 0;
+
+ALTER TABLE FollowUser
+ADD CONSTRAINT uc_FollowUser UNIQUE (userId,connectionId)

@@ -1,0 +1,70 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <% include header %>
+    <body>
+    <% include profile_navbar %>
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="index.ejs">Home</a></li>
+                    <li role="presentation"><a href="#">About</a></li>
+                    <li role="presentation"><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Project name</h3>
+        </div>
+ <form class="form-horizontal" method="post" id="newForm" action="/fCompanys">
+        <div class="container">
+         
+             <div class="row" id="companys">
+             <div class="row">
+             <div class="col-md-8">
+			 <h3><span class="label label-default">Results</span></h3>
+			 </div>
+			 <div class="col-md-2">
+			<span> <button type="submit" class="btn btn-primary">Follow Company</button></span>
+			 </div>
+			 </div>
+			 <br>
+			 <% for(var i=0; i< foundCompany.length; i++) {%>
+			  <div class="row" >
+			<div class="col-md-8">
+			<div class="panel panel-default">
+			 <div class="panel-heading">
+<h3 class="panel-title"><label ><%=foundCompany[i].name%>  </label></h3>
+</div>
+<div class="panel-body">
+<table class="table">
+<tbody>
+<tr>
+<td><span><img src=<%=foundCompany[i].imageUrl%> alt="profile_pic" class="img-circle"> </span> </td>
+<td><span id="description"><%=foundCompany[i].url%></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+  <div class="checkbox" class="col-md-2">
+    <label>
+      <input type="radio" name="companyId" id="blankRadio1" aria-label="..." value=<%=foundCompany[i].companyId%>>
+      Select
+       </label>
+  </div>
+  </div>
+<br>
+ <%}%>
+ </div>
+</div>
+ </div>
+ </form> <!--container!-->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      </body>
+    </html>

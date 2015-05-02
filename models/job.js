@@ -7,7 +7,7 @@ var jobSchema = new mongoose.Schema({
         company: {type : String , required : true},
         location: {type : String , required : true},
         description: {type : String , required : true},
-        createAt: {type: Date, required: true, expires: '1d', default: Date.now}
+        expires: {type: Date, required: true}
 });
 
 module.exports = mongoose.model('Job', jobSchema);
