@@ -15,10 +15,13 @@
         <h3 class="text-muted">Project name</h3>
     </div>
 
+    <h3><span class="label label-default">2 career path recommended to you</span></h3>
+    <br>
+    <br>
     <div class="row text-center">
         <!-- First career path recommendation -->
-        <div class="col-md-4">
-            <p style="height:140px"></p>
+        <div class="col-md-6">
+            <img style="height:140px; width:140px;" src=<%=foundUser.imageUrl%> alt="profile_pic" class="img-circle">
             <ul class="timeline">
                 <li><!---Position 1--->
 
@@ -57,7 +60,7 @@
         </div>
 
         <!-- Second career path recommendation -->
-        <div class="col-md-4">
+        <div class="col-md-6">
             <img style="height:140px; width:140px;" src=<%=foundUser.imageUrl%> alt="profile_pic" class="img-circle">
             <ul class="timeline">
                 <li><!---Position 1--->
@@ -93,46 +96,6 @@
                     </div>
                 </li>
             </ul>
-        </div>
-
-        <!-- Third career path recommendation -->
-        <div class="col-md-4">
-            <p style="height:140px"></p>
-            <ul class="timeline">
-                <li><!---Position 1--->
-                    <div class="timeline-badge up"><i class="fa fa-thumbs-up"></i></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title"><%=foundUser.headline%></h4>
-                        </div>
-                    </div>
-                </li>
-                <li><!---Position 2--->
-                    <div class="timeline-badge down"><i class="fa fa-thumbs-down"></i></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title"><%=foundRec[2].position2%></h4>
-                        </div>
-                    </div>
-                </li>
-                <li><!---Position 3--->
-                    <div class="timeline-badge neutral"><i class="fa fa-navicon"></i></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title"><%=foundRec[2].position3%></h4>
-                        </div>
-                    </div>
-                </li>
-                <li><!---Position 4--->
-                    <div class="timeline-badge down"><i class="fa fa-thumbs-down"></i></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title"><%=foundRec[2].position4%></h4>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
         </div>
     </div>
 </div>
