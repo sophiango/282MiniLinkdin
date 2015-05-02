@@ -251,62 +251,65 @@ router.get('/:user_id', function (req, res) {
     });
 });
 
-router.get('/:user_id/addSkill',function (req, res){
-    var user_id = req.params.user_id;
-    User.findOne({userId:req.params.user_id}, function (err, foundUser) {
-        if (err) {
-            console.log(err);
-            if (err) {
-                res.render('add_skill',{
-                    message:null,
-                    err: 'Cannot find user'
-                })
-            }
-        }
-        else {
-            console.log()
-            res.render('add_skill',{
-                user_id: user_id,
-                connection_count: '100',
-                User: foundUser
-            });
-        }
-    });
-});
+//router.get('/:user_id/addSkill',function (req, res){
+//    var user_id = req.params.user_id;
+//    User.findOne({userId:req.params.user_id}, function (err, foundUser) {
+//        if (err) {
+//            console.log(err);
+//            if (err) {
+//                res.render('add_skill',{
+//                    message:null,
+//                    err: 'Cannot find user'
+//                })
+//            }
+//        }
+//        else {
+//            console.log()
+//            res.render('add_skill',{
+//                user_id: user_id,
+//                connection_count: '100',
+//                User: foundUser
+//            });
+//        }
+//    });
+//});
 
-router.post('/:user_id/addSkill',function (req, res){
-    User.findOne({userId:req.params.user_id},function(err,foundUser) {
-        if (err) {
-            console.log(err);
-            res.render('index',{
-                message:null,
-                err: 'Cannot find user'
-            })
-        }
-        else {
-            foundUser.skills.addToSet(req.body.skill1,req.body.skill2,req.body.skill3);
-            foundUser.save(function (err) {
-                if (err) {
-                    console.log(err);
-                    res.render('add_skill',{
-                        User : foundUser,
-                        user_id: User.userId,
-                        message:null,
-                        err: "Cannot add new experience"
-                    })
-                }
-                else{
-                    res.render('add_skill',{
-                        User : foundUser,
-                        user_id: User.userId,
-                        message:"Successfully added an experience. You can add more experience or go back to your profile",
-                        err: null
-                    })
-                }
-            });
-        }
-    });
-});
+//router.post('/:user_id/addSkill',function (req, res){
+//    User.findOne({userId:req.params.user_id},function(err,foundUser) {
+//        if (err) {
+//            console.log(err);
+//            res.render('index',{
+//                message:null,
+//                err: 'Cannot find user'
+//            })
+//        }
+//        else {
+//            //foundUser.skills.addToSet(req.body.skill1,req.body.skill2,req.body.skill3);
+//            foundUser.skill1 = req.body.skill1;
+//            foundUser.skill2 = req.body.skill2;
+//            foundUser.skill3 = req.body.skill3;
+//            foundUser.save(function (err) {
+//                if (err) {
+//                    console.log(err);
+//                    res.render('add_skill',{
+//                        User : foundUser,
+//                        user_id: User.userId,
+//                        message:null,
+//                        err: "Cannot add new experience"
+//                    })
+//                }
+//                else{
+//                    res.render('add_skill',{
+//                        User : foundUser,
+//                        user_id: User.userId,
+//                        message:"Successfully added an experience. You can add more experience or go back to your profile",
+//                        err: null
+//                    })
+//                }
+//            });
+//        }
+//    });
+//});
 
 router.get('/:user_id/recommendCareer',function(req,res){
     User.findOne({userId:req.params.user_id},function(err,foundUser) {
@@ -357,6 +360,9 @@ router.post('/:user_id/edit_profile',myMulter, function (req, res) {
     console.log("req.body.imageUrlHidden "+req.body.imageUrlHidden);
     console.log("req.body.headline "+req.body.headline);
     console.log("req.body.headlineId "+req.body.headlineId);
+    console.log("req.body.skillOneId "+req.body.skillOneId);
+    console.log("req.body.skillTwoId "+req.body.skillTwoId);
+    console.log("req.body.skillThreeId "+req.body.skillThreeId);
  //  if (req.body.imageUrlHidden)  {link=req.body.imageUrlHidden}  	
    //else{
     if (req.files.imageUrl){
@@ -401,7 +407,10 @@ else{link=req.body.imageUrlHidden;}
             firstName : req.body.firstName,
             lastName : req.body.lastName,
             headline : req.body.headline,
-            imageUrl : link
+            imageUrl : link,
+            skill1 : req.body.skill1,
+            skill2 : req.body.skill2,
+            skill3 : req.body.skill3
         }},
         function(err,foundUser){
             if (err) {

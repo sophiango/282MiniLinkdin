@@ -7,7 +7,7 @@
  
 
    $(document).ready(function () {
-     alert("hi");
+//     alert("hi");
     $( "#headline" ).autocomplete({
         source: function (request, response) {
                 $.ajax({
@@ -19,7 +19,7 @@
                     success: function (data) {
                        
                         response($.map(data.result, function (item) {
-                             alert("data "+item.value);
+                             //alert("data "+item.value);
                             return {
 
                                 label: item.value,
@@ -39,9 +39,104 @@
                 $("#headlineId").val(i.item.val);
             },
             minLength: 1
-})
+    });
+       $( "#skill1" ).autocomplete({
+           source: function (request, response) {
+               $.ajax({
+                   url: '/staticId/skill',
+                   data: '{ "skill":"' + request.skill + '"}',
+                   dataType: "json",
+                   type: "POST",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (data) {
+
+                       response($.map(data.result, function (item) {
+                           alert("data "+item.value);
+                           return {
+
+                               label: item.value,
+                               val: item.id
+                           }
+                       }))
+                   },
+                   error: function (response) {
+                       alert(response.responseText);
+                   },
+                   failure: function (response) {
+                       alert(response.responseText);
+                   }
+               });
+           },
+           select: function (e, i) {
+               $("#skillOneId").val(i.item.val);
+           },
+           minLength: 1
+       })
+       $( "#skill2" ).autocomplete({
+           source: function (request, response) {
+               $.ajax({
+                   url: '/staticId/skill',
+                   data: '{ "skill":"' + request.skill + '"}',
+                   dataType: "json",
+                   type: "POST",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (data) {
+
+                       response($.map(data.result, function (item) {
+                           //alert("data "+item.value);
+                           return {
+                               label: item.value,
+                               val: item.id
+                           }
+                       }))
+                   },
+                   error: function (response) {
+                       alert(response.responseText);
+                   },
+                   failure: function (response) {
+                       alert(response.responseText);
+                   }
+               });
+           },
+           select: function (e, i) {
+               $("#skillTwoId").val(i.item.val);
+           },
+           minLength: 1
+       })
+       $( "#skill3" ).autocomplete({
+           source: function (request, response) {
+               $.ajax({
+                   url: '/staticId/skill',
+                   data: '{ "skill":"' + request.skill + '"}',
+                   dataType: "json",
+                   type: "POST",
+                   contentType: "application/json; charset=utf-8",
+                   success: function (data) {
+
+                       response($.map(data.result, function (item) {
+                           //alert("data "+item.value);
+                           return {
+
+                               label: item.value,
+                               val: item.id
+                           }
+                       }))
+                   },
+                   error: function (response) {
+                       //alert(response.responseText);
+                   },
+                   failure: function (response) {
+                       //alert(response.responseText);
+                   }
+               });
+           },
+           select: function (e, i) {
+               $("#skillThreeId").val(i.item.val);
+           },
+           minLength: 1
+       })
 });
- alert("hiddenFomDate " + document.getElementById('headlineId').value);
+ //alert("hiddenFomDate " + document.getElementById('headlineId').value);
 </script>
 <body>
 <% include profile_navbar %>
@@ -87,10 +182,25 @@
                         <label for="headline">Headline: </label>
                     </div>
                     <div class="col-lg-10">
-                        <textarea class="form-control" id="headline" name="headline" placeholder="Input new headline" required="required" ><%- User.headline%></textarea>
+                        <input type="text" class="form-control" id="headline" name="headline" placeholder="Input new headline" required="required" value=<%=User.headline%>>
+                        <!--<textarea class="form-control" id="headline" name="headline" placeholder="Input new headline" required="required" ><User.headline></textarea>-->
                     </div>
                 </div>
                  <input type="hidden" id="headlineId" name="headlineId"/>
+                 <input type="hidden" id="skillOneId" name="skillOneId"/>
+                <input type="hidden" id="skillTwoId" name="skillTwoId"/>
+                <input type="hidden" id="skillThreeId" name="skillThreeId"/>
+                <div class="form-group required">
+                    <div class="col-lg-2 control-label">
+                        <label>Skills: </label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id=skill1 name=skill1 placeholder="input skill" value=<%=User.skill1%>>
+                        <br>
+                        <input type="text" class="form-control" id=skill2 name=skill2 placeholder="input skill" value=<%=User.skill2%>>
+                        <br>
+                        <input type="text" class="form-control" id=skill3 name=skill3 placeholder="input skill" value=<%=User.skill3%>>
+                    </div>
             </center>
         </div>
 
