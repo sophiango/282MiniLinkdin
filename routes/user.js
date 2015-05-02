@@ -352,8 +352,7 @@ router.get('/:user_id/recommendCareer',function(req,res){
                     console.log(err);
                 }
                 else{
-                    console.log(foundRec[2].position2);
-                    console.log(foundUser.headline);
+                    console.log(foundRec);
                     res.render('career_path',{
                         foundRec : foundRec,
                         foundUser : foundUser
