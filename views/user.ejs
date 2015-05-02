@@ -20,11 +20,10 @@
         <h2><%=User.firstName + " " + User.lastName%></h2>
         <h4><em><%=User.headline%></em></h4>
         <span><h4>Skills:
-            <% for(var i=0; i< User.skills.length; i++) {%>
-                <span class="label label-info"><%=User.skills[i]%></span>
-            <%}%>
+                <span class="label label-info"><%=User.skill1%></span>
+                <span class="label label-info"><%=User.skill2%></span>
+                <span class="label label-info"><%=User.skill3%></span>
             </h4></span>
-       
         </div>
         <div class="col-md-4">
             <form class="form-horizontal" method="get" action="/user/<%=User.userId%>/edit_profile">
