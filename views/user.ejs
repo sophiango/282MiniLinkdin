@@ -54,22 +54,25 @@
                     </form>
                 </div>
             </div>
-            <% for(var i=0; i< User.experience.length; i++) {%>
+           
             <div>
                 <div class="col-md-8">
-                    <h3><%=User.experience[i].position%></h3>
-                    <h4><%=User.experience[i].company%></h4>
-                    <em><%=User.experience[i].from + " - " + User.experience[i].to%></em>
-                </div>
 
-                <!--<div class="col-md-4">-->
-                    <!--<img src=<=Company.imageUrl> alt="company_logo" class="img-thumbnail">-->
-                <!--</div>-->
-                <div class="col-md-12">
-                <p><%=User.experience[i].description%></p>
+                    <h3><%=User.company1%></h3>
+                    <h4><%=User.position1%></h4>
+                    <br>
+                    <h3><%=User.company2%></h3>
+                    <h4><%=User.position2%></h4>
+                    <br>
+                    <h3><%=User.company3%></h3>
+                    <h4><%=User.position3%></h4>
+                    <br>
+                    <h3><%=User.company4%></h3>
+                    <h4><%=User.position4%></h4>
                 </div>
+                <br>
             </div>
-            <%}%>
+            
         </div>
 
         <hr>
@@ -92,13 +95,9 @@
                     </form>
                 </div>
             </div>
-            <% for(var i=0; i< User.education.length; i++) {%>
-            <div class="col-md-8">
-                <h3><%=User.education[i].institution%></h3>
-                <h4><%=User.education[i].degree%></h4>
-                <em><%=User.education[i].fromYear + " - " + User.education[i].toYear%></em>
-            </div>
-            <%}%>
+            
+                <h4><%=User.education%></h4>
+                
             <!--<div class="col-md-4">-->
                 <!--<img src="https://media.licdn.com/media/p/2/005/074/2aa/1c3bae2.png" alt="company_logo" class="img-thumbnail">-->
             <!--</div>-->
