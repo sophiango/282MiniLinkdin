@@ -14,7 +14,7 @@ var statusSchema = new mongoose.Schema({
 //},{ _id : false })
 
 var companySchema = new mongoose.Schema({
-    companyId : {type : String , required : true, unique: true, dropDups: true},
+    companyId : {type : Number , required : true, unique: true, dropDups: true},
     name : {type : String , required : true, unique: true, dropDups: true},
     email: {type : String , required : true, unique: true, dropDups: true},
     addressLine1: {type : String },

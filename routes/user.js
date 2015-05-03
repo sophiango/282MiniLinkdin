@@ -309,7 +309,7 @@ router.get('/:user_id/recommendJob',function(req,res){
 
 router.get('/:user_id/test',function(req,res){
     console.log("Testing");
-    var recommend = new JobRecommend({
+    var recommend = new UserRecommend({
         userId: req.params.user_id,
         jobId: 15
     });
@@ -385,7 +385,7 @@ router.get('/:user_id/recommendCareer',function(req,res){
         }
         else{
             console.log("headline id: " + foundUser.headlineId);
-            CareerRecommend.find({position1: foundUser.headlineId},function(err,foundRec){
+            CareerRecommend.find({'$or':[{pid1: foundUser.headlineId},{pid2: foundUser.headlineId},{pid3: foundUser.headlineId},{pid4: foundUser.headlineId}]},function(err,foundRec){
                 if(err){
                     console.log(err);
                     res.render('career_path',{

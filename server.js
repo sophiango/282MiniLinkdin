@@ -21,8 +21,8 @@ var shortDateFormat = "YY/M/DD HH:MM:SS"; // this is just an example of storing 
 app.locals.moment = moment; // this makes moment available as a variable in every EJS page
 app.locals.shortDateFormat = shortDateFormat;
 
-//mongoose.connect('mongodb://54.67.121.165:27017/minilinkedin');
-mongoose.connect('mongodb://spurthysambidi:spurthy20@ds041167.mongolab.com:41167/azuredb');
+mongoose.connect('mongodb://cmpe282:cmpe282@ds031982.mongolab.com:31982/demo282');
+//mongoose.connect('mongodb://spurthysambidi:spurthy20@ds037617.mongolab.com:37617/final282');
 //mongoose.connection.on('open', function() {
 //console.log(mongoose.connection.collection);
 //mongoose.connection.db.collectionNames(function (err, names) {
@@ -63,5 +63,11 @@ app.use('/staticId', staticId);
 app.use(function(req, res, next) {
     res.render('404');
 });
+
+//app.listen(8080);
+
+//var server = app.listen(app.get('port'), function() {
+//    console.log('Express server listening on port ' + server.address().port);
+//});
 
 module.exports = app;
