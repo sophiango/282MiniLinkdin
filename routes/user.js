@@ -249,6 +249,8 @@ router.get('/:user_id', function (req, res) {
         }
         else {
             console.log(foundUser.skill1);
+            console.log(foundUser.company1);
+            console.log(foundUser.position1);
             res.render('user',{
                 User: foundUser});
         }
@@ -574,19 +576,12 @@ router.get('/:user_id/edit_exp',function (req, res) {
             })
         }
         else {
-            if(foundUser.experience.length>0) {
-                res.render('edit_exp', {
-                    user_id: req.params.user_id,
-                    User: foundUser
-                })
-            }
-            else{
+           
                 res.render('add_new_exp', {
                     user_id: req.params.user_id,
                     message: null,
                     err: null
                 })
-            }
         }
     });
 });

@@ -1,26 +1,5 @@
 var mongoose = require('mongoose');
 
-var educationSchema = new mongoose.Schema({
-	id:Number,
-    institution: String,
-    degree: String,
-    fromYear: String,
-    toYear: String
-},{ _id : false });
-
-var experienceSchema = new mongoose.Schema({
-	id:Number,
-    position: String,
-    company: String,
-    from: String,
-    to: String,
-    description:String
-},{ _id : false });
-
-var statusSchema = new mongoose.Schema({
-    content: String,
-    createAt: {type: Date, default: Date.now}
-})
 
 var userSchema = new mongoose.Schema({
     userId : {type : Number , required : true, unique: true, dropDups: true},
@@ -31,8 +10,7 @@ var userSchema = new mongoose.Schema({
     skill2 : String,
     skill3 : String,
     status: [statusSchema],
-    education:[educationSchema],
-    headline : String,
+    education:String,
     position1 : String,
     position2 : String,
     position3 : String,
@@ -42,7 +20,20 @@ var userSchema = new mongoose.Schema({
     pid2:Number,
     pid3:Number,
     pid4:Number,
-    positionCount: Number
+    positionCount: Number,
+    company1:String,
+    company2:String,
+    company3:String,
+    company4:String,
+    cId1:Number,
+    cId2:Number,
+    cId3:Number,
+    cId4:Number,
+    headline : String,
+    locationId:Number,
+    location:String,
+    createdAt:String,
+    lastUpdated:String
 
 });
 
