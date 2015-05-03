@@ -14,11 +14,16 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <% if (foundRec.length > 0){ %>
+    <% if (foundRec.length >0 ){ %>
+    <% if (foundRec.length == 2){ %>
     <h3><span class="label label-default">2 career path recommended to you</span></h3>
+    <% }else if (foundRec.length==1){%>
+    <h3><span class="label label-default">1 career path recommended to you</span></h3>
+    <%}%>
     <br>
     <br>
     <div class="row text-center">
+        <%if (foundRec.length == 2) {%>
         <!-- First career path recommendation -->
         <div class="col-md-6">
             <img style="height:140px; width:140px;" src=<%=foundUser.imageUrl%> alt="profile_pic" class="img-circle">
@@ -97,6 +102,47 @@
                 </li>
             </ul>
         </div>
+        <%}else if (foundRec.length == 1){%>
+        <!-- First career path recommendation -->
+        <div class="col-md-12 text-center">
+            <img style="height:140px; width:140px;" src=<%=foundUser.imageUrl%> alt="profile_pic" class="img-circle">
+            <ul class="timeline">
+                <li><!---Position 1--->
+
+                    <div class="timeline-badge up"><i class="fa fa-thumbs-up"></i></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title"><%=foundRec[0].position1%></h4>
+                        </div>
+                    </div>
+                </li>
+                <li><!---Position 2--->
+                    <div class="timeline-badge down"><i class="fa fa-thumbs-down"></i></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title"><%=foundRec[0].position2%></h4>
+                        </div>
+                    </div>
+                </li>
+                <li><!---Position 3--->
+                    <div class="timeline-badge neutral"><i class="fa fa-navicon"></i></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title"><%=foundRec[0].position3%></h4>
+                        </div>
+                    </div>
+                </li>
+                <li><!---Position 4--->
+                    <div class="timeline-badge down"><i class="fa fa-thumbs-down"></i></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title"><%=foundRec[0].position4%></h4>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <%}%>
     </div>
     <%}else{%>
     <h3><span class="label label-default">Currently, no career path are recommend to you. Make sure you input a headline</span></h3>
