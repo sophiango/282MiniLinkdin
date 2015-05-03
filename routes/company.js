@@ -3,6 +3,7 @@ var router = express.Router();
 var chance = require('chance').Chance();
 var User = require('../models/user');
 var Company = require('../models/company');
+var CandidateRecommend = require('../models/CandidateRecommend');
 var Job = require('../models/job');
 var model = require('../models/followCompany');
 var loginmodel = require('../models/login');
@@ -486,13 +487,32 @@ router.get('/:comp_id/search_candidate',function(req,res){
             }
         });
     }
-})
+});
 
-router.get('/:comp_id/recommendCandidate', function (req, res) {
-    var comp_id = req.params.comp_id;
-    res.render('recommendCandidate',{
-        foundUser: null
+router.get('/:comp_id/test',function(req,res){
+    console.log("Testing");
+    var recommend = new CandidateRecommend({
+        userId: 10,
+        candidate1: 11,
+        candidate2: 12,
+        candidate3: 13
     });
+    recommend.save(function(err,res){
+        if (err) {
+            console.log(err);
+        }
+        else{
+            console.log(res);
+        }
+    })
+});
+
+//router.get('/:comp_id/recommendCandidate', function (req, res) {
+//    var comp_id = req.params.comp_id;
+//    res.render('recommendCandidate',{
+//        foundUser: null,
+//        comp_id: comp_id
+//    });
     //Job.find({companyId:comp_id},function(err,jobList){
     //    if (err ){ console.log("Error" + err);}
     //    else {
@@ -500,17 +520,41 @@ router.get('/:comp_id/recommendCandidate', function (req, res) {
     //        res.render('viewPostedJobs',{jobList:foundJob,companyId:comp_id} );
     //    }
     //});
-});
+//});
 
 router.post('/:comp_id/recommendCandidate', function (req, res) {
     var comp_id = req.params.comp_id;
-    var job_id = req.body.jobId;
-    console.log("Recommend candidate for job: " + job_id);
-    if (comp_id < 0 || job_id < 0){
-        res.status(404).send('Invalid company id or job id');
-    }
-
-
+    var selected_user = req.body.userId;
+    console.log("Recommend candidate for job: " + selected_user);
+    CandidateRecommend.findOne({userId: selected_user},function(err, result){
+        if (err){
+            console.log(err);
+            //res.render('similarCandidate',{
+            //    foundUser:null
+            //})
+        }
+        else{
+            console.log("result: " + result);
+            User.find({'$or':[{userId:result.candidate1},{userId:result.candidate2},{userId:result.candidate3}]},function(err,foundUser) {
+                if (err) {
+                    console.log(err);
+                    res.render('similarCandidate', {
+                        foundUser: null,
+                        errMsg: "No recommend user found for this user",
+                        comp_id : comp_id
+                    })
+                }
+                else{
+                    console.log("Recommend users: " + foundUser);
+                    res.render('similarCandidate', {
+                        foundUser: foundUser,
+                        errMsg: null,
+                        comp_id : comp_id
+                    })
+                }
+            });
+        }
+    });
     // query goes here
     //Job.remove({jobId:job_id,comapnyId:comp_id},function(err) {
     //    if (err) {console.log(err);}

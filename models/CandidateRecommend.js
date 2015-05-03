@@ -1,7 +1,7 @@
 var mongoose = require ('mongoose');
 
 var candidateRecommendSchema = new mongoose.Schema({
-    jobId:Number,
+    userId:Number,
     candidate1:Number,
     candidate2:Number,
     candidate3:Number
