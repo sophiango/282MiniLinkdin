@@ -32,6 +32,7 @@ mongoose.connect('mongodb://cmpe282:cmpe282@ds031982.mongolab.com:31982/demo282'
 //});
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -41,8 +42,16 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('public'));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+    console.log('did it run first?');
+    if (!req.session){
+        console.log('it wonttt run');
+        res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0'); }
+    next();
+});
 
 app.use(session({
 	  secret: 'keyboard cat',
@@ -64,8 +73,14 @@ app.use(function(req, res, next) {
     res.render('404');
 });
 
-//app.listen(8080);
+// app.set('port', process.env.PORT || 3000);
 
+// app.listen(app.get('port'), function() {
+//     console.log('Express server listening on port ' + "3000");
+//   //debug('Express server listening on port ' + server.address().port);
+// });
+app.listen(8080);
+console.log('Listening on port 80');
 //var server = app.listen(app.get('port'), function() {
 //    console.log('Express server listening on port ' + server.address().port);
 //});

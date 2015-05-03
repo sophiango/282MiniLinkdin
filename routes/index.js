@@ -490,4 +490,40 @@ router.post('/signupComp',function(req,res){
 })
 // code ends here
 
+//logout handled here karan
+router.get('/logout', function(req, res) {
+    console.log("logout baba zindabaad!");
+    req.session.destroy(function(err) {
+        res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+        res.redirect('/login');
+    });
+    // cannot access session here
+});
+
+
+
+//aboutUs handled here
+router.get('/aboutUs', function(req, res) {
+
+
+    res.render('aboutUs',{
+        message: null,
+        err: null,
+        next_page: "Go back home"
+    });
+});
+
+//team handled here
+router.get('/team', function(req, res) {
+
+
+    res.render('team',{
+        message: null,
+        err: null,
+        next_page: "Go back home"
+    });
+});
+
+// karan's code end.
+
 module.exports = router;

@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+!/usr/bin/env node
 var debug = require('debug')('mini linkedin');
 var app = require('../server');
 

@@ -107,16 +107,21 @@ router.param('user_id', function(req, res, next, user_id) {
     // var user_id = req.params.user_id;
     console.log('user param is'+user_id);
 
-    if(!mySesn || mySesn=='undefined'|| mySesn.toString()!=user_id)
+    if(req.session)
     {
-        console.log('u r trapped, my friend');
-        return res.redirect('/login');
+        if(!mySesn || mySesn.toString()==='undefined'|| mySesn.toString()!==user_id)
+        {
+            console.log('u r trapped, my friend');
+            return res.redirect('/login');
+        }
     }
+    else
+    {console.log('u r trapped, my friend');
+        return res.redirect('/login');}
 
     // continue doing what we were doing and go to the route
     next();
 });
-
 
 router.get('/:user_id/home',function(req,res){
 
