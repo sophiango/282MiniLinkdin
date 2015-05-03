@@ -19,40 +19,16 @@
             <center>
                 <h4>Editing education</h4>
                 <div class="row" id="experience">
-                    <% for(var i=0; i< User.education.length; i++) {%>
-                    <div>
+                    
                         <div class="form-group required">
                             <div class="col-lg-2 control-label">
                                 <label for="position">Institution: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputSchool" required="required"  value=<%=User.education[i].institution%>>
+                                <input type="text" class="form-control" name="inputSchool" required="required"  value="<%=User.education%>">
                             </div>
                         </div>
-                        <div class="form-group required">
-                            <div class="col-lg-2 control-label">
-                                <label for="position">Degree: </label>
-                            </div>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputDegree"  required="required" value=<%=User.education[i].degree%> >
-                            </div>
-                        </div>
-                        <div class="form-group required">
-                        	<div class="col-lg-2 control-label">
-                                <label for="position">From Date: </label>
-                            </div>
-                            <div class="col-lg-3 col-xs-2">
-                                <input type="text" class="form-control" name="inputFrom" placeholder="From" required="required" value=<%=User.education[i].fromYear%>>
-                            </div>
-                            <div class="col-lg-2 control-label">
-                                <label for="position">To Date: </label>
-                            </div>
-                            <div class="col-lg-3 col-xs-2">
-                                <input type="text" class="form-control" name="inputTo" placeholder="To" required="required" value=<%=User.education[i].toYear%>>
-                            </div>
-                        </div>
-                    </div>
-                    <%}%>
+                        
                 </div>
             </center>
         </div>

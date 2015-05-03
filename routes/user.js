@@ -438,7 +438,6 @@ router.post('/:user_id/edit_profile',myMulter, function (req, res) {
     var link='';
     console.log("req.files.imageUrl "+req.files.imageUrl);
     console.log("req.body.imageUrlHidden "+req.body.imageUrlHidden);
-    console.log("req.body.headline "+req.body.headline);
     console.log("req.body.headlineId "+req.body.headlineId);
     console.log("req.body.skillOneId "+req.body.skillOneId);
     console.log("req.body.skillTwoId "+req.body.skillTwoId);
@@ -486,11 +485,12 @@ router.post('/:user_id/edit_profile',myMulter, function (req, res) {
     User.update({userId:user_id},{$set: {
             firstName : req.body.firstName,
             lastName : req.body.lastName,
-            headline : req.body.headline,
             imageUrl : link,
             skill1 : req.body.skill1,
             skill2 : req.body.skill2,
-            skill3 : req.body.skill3
+            skill3 : req.body.skill3,
+            location : req.body.location,
+            locaionId : req.body.locationId
         }},
         function(err,foundUser){
             if (err) {
@@ -582,7 +582,7 @@ router.get('/:user_id/edit_exp',function (req, res) {
         else {
            
                 res.render('add_new_exp', {
-                    user_id: req.params.user_id,
+                	User: foundUser,
                     message: null,
                     err: null
                 })
@@ -591,14 +591,84 @@ router.get('/:user_id/edit_exp',function (req, res) {
 });
 
 router.post('/:user_id/edit_exp', function (req, res) {
+	 console.log("Reached post exp ");
+	 var posiCnt=0;
+	 var headline="";
+	 var headlineId=0;
     var user_id = req.params.user_id;
-    console.log("req "+req.body);
+    console.log("req "+user_id);
+    var company1=req.body.company1;
+    var position1=req.body.position1;
+    if (position1)
+    	{posiCnt=1;
+    	}
+    var cid1=req.body.cid1;
+    var pid1=req.body.pid1;
+    console.log("reac 1");
+    var company2=req.body.company2;
+    var position2=req.body.position2;
+    if (position2)
+	{posiCnt=2;}
+    var cid2=req.body.cid2;
+    var pid2=req.body.pid2;
+    console.log("reac 2");
+    var company3=req.body.company3;
+    var position3=req.body.position3;
+    if (position3)
+	{posiCnt=3;}
+    var cid3=req.body.cid3;
+    var pid3=req.body.pid3;
+    console.log("reac 3");
+    var company4=req.body.company4;
+    var position4=req.body.position4;
+    if (position4)
+	{posiCnt=4;}
+    var cid4=req.body.cid4;
+    var pid4=req.body.pid4;
+    console.log("reac 4");
+    console.log("cid4 "+company4);
+    console.log("pid4 "+position4);
+    switch(posiCnt) {
+    case 1:
+    	headline=position1;
+    	headlineId=pid1;
+        break;
+    case 2:
+    	headline=position2;
+    	headlineId=pid2;
+        break;
+    case 3:
+    	headline=position3;
+    	headlineId=pid3;
+        break;
+    case 4:
+    	headline=position4;
+    	headlineId=pid4;
+        break;
+    default:         
+        headline="";
+	    headlineId=0;
+} 
+    
     return User.findOne({userId: req.params.user_id}, function (err, foundUser) {
-        foundUser.experience[0].position= req.body.inputPosition;
-        foundUser.experience[0].company= req.body.inputCompany;
-        foundUser.experience[0].from= req.body.inputFrom;
-        foundUser.experience[0].to= req.body.inputTo;
-        foundUser.experience[0].description= req.body.inputDesc;
+        foundUser.company1= company1;
+        foundUser.position1= position1;
+        foundUser.cid1= cid1;
+        foundUser.pid1= pid1;
+        foundUser.company2= company2;
+        foundUser.position2=position2;
+        foundUser.cid2= cid2;
+        foundUser.pid2= pid2;
+        foundUser.company3= company3;
+        foundUser.position3=position3;
+        foundUser.cid3= cid3;
+        foundUser.pid3= pid3;
+        foundUser.company4= company4;
+        foundUser.position4=position4;
+        foundUser.cid4= cid4;
+        foundUser.pid4= pid4;
+        foundUser.headline= headline;
+        foundUser.headlineId= headlineId;
         return foundUser.save(function (err) {
             if (!err) {
                 /* res.render('user', {
@@ -675,19 +745,13 @@ router.get('/:user_id/edit_edu',function (req, res) {
             })
         }
         else {
-            if(foundUser.education.length>0) {
-                res.render('edit_edu', {
-                    user_id: req.params.user_id,
-                    User: foundUser
-                })
-            }
-            else{
+            
                 res.render('add_new_edu', {
-                    user_id: req.params.user_id,
+                    User: foundUser,
                     message: null,
                     err: null
                 })
-            }
+            
         }
     });
 });
@@ -696,10 +760,7 @@ router.post('/:user_id/edit_edu', function (req, res) {
     console.log("Re body "+req.body.inputDegree);
     var user_id = req.params.user_id;
     User.findOne({userId: req.params.user_id}, function (err, foundUser) {
-        foundUser.education[0].institution= req.body.inputSchool;
-        foundUser.education[0].degree= req.body.inputDegree;
-        foundUser.education[0].fromYear= req.body.inputFrom;
-        foundUser.education[0].toYear= req.body.inputTo;
+        foundUser.education= req.body.inputSchool;
         foundUser.save(function (err) {
             if (!err) {
                 res.redirect('/user/'+user_id);

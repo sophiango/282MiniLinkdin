@@ -14,7 +14,7 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <form method="post" action="/user/<%=user_id%>/edu" class="form-horizontal">
+    <form method="post" action="/user/<%=User.userId%>/edit_edu" class="form-horizontal">
         <div id="user_profile">
             <p class="bg-success"><%=message%></p>
             <p class="bg-danger"><%=err%></p>
@@ -26,31 +26,11 @@
                                 <label for="position">Institution: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputSchool" placeholder="Input a school" required="required">
+                                <input type="text" class="form-control" name="inputSchool" placeholder="Input a school" required="required" value="<%=User.education%>">
                             </div>
                         </div>
-                        <div class="form-group required">
-                            <div class="col-lg-2 control-label">
-                                <label for="position">Degree: </label>
-                            </div>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" name="inputDegree" placeholder="Input degree" required="required">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                        <div class="col-lg-2 control-label">
-                                <label for="position">From Date: </label>
-                            </div>
-                            <div class="col-lg-3 col-xs-2">
-                                <input type="date" class="form-control" name="inputFrom" placeholder="From" required="required">
-                            </div>
-                            <div class="col-lg-2 control-label">
-                                <label for="position">To Date: </label>
-                            </div>
-                            <div class="col-lg-3 col-xs-2">
-                                <input type="date" class="form-control" name="inputTo" placeholder="To" required="required">
-                            </div>
-                        </div>
+                       
+                       
                     </div>
             </center>
         </div>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include header %>
+<link rel='stylesheet' href='stylesheets/style.css' />
+
 <body>
 <% include profile_navbar %>
 <div class="container">
@@ -14,57 +16,97 @@
         </nav>
         <h3 class="text-muted">Project name</h3>
     </div>
-    <form method="post" action="/user/<%=user_id%>/exp" class="form-horizontal">
+    <form method="post" action="/user/<%=User.userId%>/edit_exp" class="form-horizontal">
         <div id="user_profile">
             <p class="bg-success"><%=message%></p>
             <p class="bg-danger"><%=err%></p>
             <center>
                 <h4>Add new experience</h4>
                 <div class="row" id="experience">
-                        <div class="form-group required">
-                            <div class="col-lg-2 control-label">
-                                <label for="position">Position: </label>
-                            </div>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" name=inputPosition placeholder="Input new position" required="required">
-                            </div>
-                        </div>
+                        
                         <div class="form-group required">
                             <div class="col-lg-2 control-label">
                                 <label for="position">Company: </label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name=inputCompany placeholder="Input company" required="required">
+                                <input id="company1" type="textarea"  class="form-control" placeholder="Input company" required="required" name="company1" value="<%=User.company1%>"></input>
                             </div>
+                             <input type="hidden" id="cid1" name="cid1" value=<%=User.cid1%>>
                         </div>
-                        <div class="form-group">
-							<div class="col-lg-2 control-label">
-                                <label for="position">From Date: </label>
-                            </div>
-                            <div class="col-lg-3 col-xs-2">
-                                <input type="date" class="form-control" name=inputFrom placeholder="From" required="required">
-                            </div>
-							<div class="col-lg-2 control-label">
-                                <label for="position">To Date: </label>
-                            </div>
-                            <div class="col-lg-3 col-xs-2">
-                                <input type="date" class="form-control" name=inputTo placeholder="To" required="required">
-                            </div>
-                        </div>
-                        <div class="form-group">
+                        <div class="form-group required">
                             <div class="col-lg-2 control-label">
-                                <label for="position">Task description: </label>
+                                <label for="position">Position: </label>
                             </div>
                             <div class="col-lg-10">
-                                <textarea class="form-control" rows="3" name=inputDesc></textarea>
+                                <input id="position1" type="text" class="form-control"  placeholder="Input new position" required="required" name="position1" value="<%=User.position1%>">
                             </div>
+                            <input type="hidden" id="pid1" name="pid1" value=<%=User.pid1%>>
                         </div>
+                        <br>
+                         <div class="form-group required">
+                            <div class="col-lg-2 control-label">
+                                <label for="position">Company: </label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input type="text" id="company2" class="form-control" placeholder="Input company"  name="company2" value="<%=User.company2%>">
+                            </div>
+                            <input type="hidden" id="cid2" name="cid2" value=<%=User.cid2%>>
+                        </div>
+                        <div class="form-group required">
+                            <div class="col-lg-2 control-label">
+                                <label for="position">Position: </label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input id="position2" type="text" class="form-control" placeholder="Input new position" name="position2" value="<%=User.position2%>">
+                            </div>
+                            <input type="hidden" id="pid2" name="pid2" value=<%=User.pid2%>>
+                        </div>
+                        <br>
+                         <div class="form-group required">
+                            <div class="col-lg-2 control-label">
+                                <label for="position">Company: </label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="company3" placeholder="Input company"  name="company3" value="<%=User.company3%>">
+                            </div>
+                            <input type="hidden" id="cid3" name="cid3" value=<%=User.cid3%>>
+                        </div>
+                        <div class="form-group required">
+                            <div class="col-lg-2 control-label">
+                                <label for="position">Position: </label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input type="text" id="position3"  class="form-control" placeholder="Input new position"  name="position3" value="<%=User.position3%>">
+                            </div>
+                            <input type="hidden" id="pid3" name="pid3" value=<%=User.pid3%>>
+                        </div>
+                        <br>
+                         <div class="form-group required">
+                            <div class="col-lg-2 control-label">
+                                <label for="position">Company: </label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="company4"  placeholder="Input company" name="company4" value="<%=User.company4%>">
+                            </div>
+                            <input type="hidden" id="cid4" name="cid4" value=<%=User.cid4%>>
+                        </div>
+                        <div class="form-group required">
+                            <div class="col-lg-2 control-label">
+                                <label for="position">Position: </label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="position4" placeholder="Input new position" name="position4" value="<%=User.position4%>">
+                            </div>
+                            <input type="hidden" id="pid4" name="pid4" value=<%=User.pid4%>>
+                        </div>
+                        
+                       
                     </div>
             </center>
         </div>
 
         <div class="pull-right">
-            <button type="submit" class="btn btn-success btn-lg">Add</button>
+            <button type="submit" class="btn btn-custom-darken">Save</button>
         </div>
     </form>
 </div> <!--container!-->
@@ -72,7 +114,11 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/black-tie/jquery-ui.css" type="text/css" />
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type = "text/javascript"></script> 
+<script src="/javascripts/profile.js"></script>
 </body>
 </html>
