@@ -340,9 +340,8 @@ router.get('/:user_id/recommendUser',function(req,res){
             var rec1 = result[0].recommendId;
             var rec2 = result[1].recommendId;
             var rec3 = result[2].recommendId;
-
-
-        }User.find({'$or':[{userId:rec1},{userId:rec2},{userId:rec3}]},function(err,foundUser) {
+        }
+        User.find({'$or':[{userId:rec1},{userId:rec2},{userId:rec3}]},function(err,foundUser) {
             if (err) {
                 console.log(err);
                 res.render('recommendUsers', {

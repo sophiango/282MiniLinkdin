@@ -1,5 +1,10 @@
 var mongoose = require('mongoose');
 
+var statusSchema = new mongoose.Schema({
+    content: String,
+    createAt: {type: Date, default: Date.now}
+});
+
 
 var userSchema = new mongoose.Schema({
     userId : {type : Number , required : true, unique: true, dropDups: true},
