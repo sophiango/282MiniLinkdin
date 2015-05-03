@@ -33,7 +33,6 @@ var userSchema = new mongoose.Schema({
     skill3 : String,
     status: [statusSchema],
     education:[educationSchema],
-    experience:[experienceSchema],
     companyId: String,
     headlineId: Number,
     skillOneId : Number,
@@ -41,7 +40,14 @@ var userSchema = new mongoose.Schema({
     skillThreeId : Number,
     position1 : String,
     position2 : String,
-    position3 : String
+    position3 : String,
+    position4 : String,
+    pid1:Number,
+    pid2:Number,
+    pid3:Number,
+    pid4:Number,
+    positionCount: Number
+
 });
 
 module.exports = mongoose.model('User', userSchema);

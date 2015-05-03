@@ -1,7 +1,11 @@
 var mongoose = require ('mongoose');
 
 var careerRecommendSchema = new mongoose.Schema({
-    position1:Number,
+    pid1:Number,
+    pid2:Number,
+    pid3:Number,
+    pid4:Number,
+    position1:String,
     position2:String,
     position3:String,
     position4:String

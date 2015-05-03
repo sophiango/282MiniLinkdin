@@ -339,23 +339,23 @@ router.get('/:user_id/recommendUser',function(req,res){
             var rec2 = result[1].recommendId;
             var rec3 = result[2].recommendId;
 
-            User.find({'$or':[{userId:rec1},{userId:rec2},{userId:rec3}]},function(err,foundUser) {
-                if (err) {
-                    console.log(err);
-                    res.render('recommendUsers', {
-                        foundUser: null,
-                        errMsg: "No recommend user found for this user"
-                    })
-                }
-                else{
-                    console.log("Recommend users: " + foundUser);
-                    res.render('recommendUsers', {
-                        foundUser: foundUser,
-                        errMsg: null
-                    })
-                }
-            });
-        }
+
+        }User.find({'$or':[{userId:rec1},{userId:rec2},{userId:rec3}]},function(err,foundUser) {
+            if (err) {
+                console.log(err);
+                res.render('recommendUsers', {
+                    foundUser: null,
+                    errMsg: "No recommend user found for this user"
+                })
+            }
+            else{
+                console.log("Recommend users: " + foundUser);
+                res.render('recommendUsers', {
+                    foundUser: foundUser,
+                    errMsg: null
+                })
+            }
+        });
     });
 });
 
