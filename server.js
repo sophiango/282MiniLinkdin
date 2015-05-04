@@ -81,7 +81,7 @@ var http = require('http');
  */
 
 //var port = normalizePort(process.env.PORT || '3000');
-var port = 8080;
+var port = 80;
 app.set('port', port);
 
 /**
