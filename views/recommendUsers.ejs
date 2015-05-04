@@ -7,7 +7,7 @@
 
 
 <div class="container">
-    <p class="bg-danger"><%=errMsg%></p>
+    <%if (result && foundUser.length > 0){%>
     <form class="form-horizontal" method="post" action="/connections" id="newForm" >
         <div class="row" id="users">
             <div class="row">
@@ -31,7 +31,7 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <td><span><img style="height:140px; width:140px;" src=<%=foundUser[i].imageUrl%> class="img-thumbnail"></span></td>
+                                    <td><span><img style="height:140px; width:140px;" class="img-thumbnail" src=<%=foundUser[i].imageUrl%> ></span></td>
                                     <td><span id="description"><%=foundUser[i].headline%></span></td>
                                 </tr>
                                 </tbody>
@@ -49,6 +49,9 @@
             <br>
             <%}%>
     </form>
+    <%} else {%>
+    <h3><span class="label label-default">Currently you don't have any recommend connection</span></h3>
+    <%}%>
 </div>
 
 <!-- Bootstrap core JavaScript

@@ -475,9 +475,9 @@ router.get('/:comp_id/search_candidate',function(req,res){
             console.log(foundUser);
             if (err) {
                 console.log(err);
-                res.redirect('index', {
-                    message: null,
-                    err: 'Cannot find user'
+                res.render('recommendCandidate', {
+                    foundUser: foundUser,
+                    comp_id: req.params.comp_id
                 });
             }
             else {
@@ -527,33 +527,44 @@ router.post('/:comp_id/recommendCandidate', function (req, res) {
     var comp_id = req.params.comp_id;
     var selected_user = req.body.userId;
     console.log("Recommend candidate for job: " + selected_user);
-    CandidateRecommend.findOne({userId: selected_user},function(err, result){
-        if (err){
+    CandidateRecommend.findOne({userId: selected_user}, function (err, result) {
+        if (err) {
             console.log(err);
-            //res.render('similarCandidate',{
-            //    foundUser:null
-            //})
+            res.render('similarCandidate', {
+                foundUser: null,
+                result: null,
+                comp_id: comp_id
+            })
         }
-        else{
-            console.log("result: " + result);
-            User.find({'$or':[{userId:result.candidate1},{userId:result.candidate2},{userId:result.candidate3}]},function(err,foundUser) {
-                if (err) {
-                    console.log(err);
-                    res.render('similarCandidate', {
-                        foundUser: null,
-                        errMsg: "No recommend user found for this user",
-                        comp_id : comp_id
-                    })
-                }
-                else{
-                    console.log("Recommend users: " + foundUser);
-                    res.render('similarCandidate', {
-                        foundUser: foundUser,
-                        errMsg: null,
-                        comp_id : comp_id
-                    })
-                }
-            });
+        else {
+            if (result == null) {
+                res.render('similarCandidate', {
+                    foundUser: null,
+                    result: null,
+                    comp_id: comp_id
+                })
+            }
+            else {
+                console.log("result: " + result);
+                User.find({'$or': [{userId: result.candidate1}, {userId: result.candidate2}, {userId: result.candidate3}]}, function (err, foundUser) {
+                    if (err) {
+                        console.log(err);
+                        res.render('similarCandidate', {
+                            foundUser: null,
+                            result: null,
+                            comp_id: comp_id
+                        })
+                    }
+                    else {
+                        console.log("Recommend users: " + foundUser);
+                        res.render('similarCandidate', {
+                            foundUser: foundUser,
+                            result: result,
+                            comp_id: comp_id
+                        })
+                    }
+                });
+            }
         }
     });
     // query goes here

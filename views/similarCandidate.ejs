@@ -5,12 +5,12 @@
 <% include company_navbar %>
 <link rel='stylesheet' href='/stylesheets/style.css' />
 <div class="container">
+    <% if (result && foundUser.length > 0) {%>
     <div class="row">
         <div class="col-md-8">
             <h3><span class="label label-default">Similar candidates</span></h3>
         </div>
     </div>
-        <% if (foundUser.length > 0) {%>
             <% for(var i=0; i< foundUser.length; i++) {%>
             <div class="row" >
                 <div class="col-md-8">
@@ -34,7 +34,7 @@
             <br>
         <%}%> <!--end for loop -->
         <%}else{%>
-        <h3><span class="label label-default">No user found</span></h3>
+        <h3><span class="label label-default">No similar candidate found</span></h3>
         <%}%> <!--end else-->
 </div>
 <!-- Bootstrap core JavaScript

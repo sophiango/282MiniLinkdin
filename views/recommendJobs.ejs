@@ -9,9 +9,8 @@
 
     <div class="container">
         <br>
-        <%if (jobList){ %>
+        <%if (result && jobList.length>0){ %>
         <form class="form-horizontal" method="post" action="/jobApplications">
-
             <div class="row" id="jobsApplied">
                 <div class="row">
                     <div class="col-md-8">

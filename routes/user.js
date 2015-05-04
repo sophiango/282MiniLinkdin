@@ -267,13 +267,15 @@ router.get('/:user_id/recommendJob',function(req,res){
         if (err) {
             console.log(err);
             res.render('recommendJobs', {
-                jobList: null
+                jobList: null,
+                result: null
             })
         }
         else {
             if (result.length==0){
                 res.render('recommendJobs', {
-                    jobList: null
+                    jobList: null,
+                    result: null
                 })
             }
             else {
@@ -285,14 +287,16 @@ router.get('/:user_id/recommendJob',function(req,res){
                 Job.find({'$or': [{jobId: rec1}, {jobId: rec2}, {jobId: rec3}]}, function (err, jobList) {
                     if (err) {
                         console.log(err);
-                        res.render('recommendUsers', {
-                            jobList: null
+                        res.render('recommendJobs', {
+                            jobList: null,
+                            result: null
                         })
                     }
                     else {
                         console.log("Recommend jobs: " + jobList);
                         res.render('recommendJobs', {
-                            jobList: jobList
+                            jobList: jobList,
+                            result: result
                         })
                     }
                 });
@@ -334,38 +338,46 @@ router.get('/:user_id/test',function(req,res){
     })
 });
 
-router.get('/:user_id/recommendUser',function(req,res){
+router.get('/:user_id/recommendUser',function(req,res) {
     var recommend_user_list = [];
-    UserRecommend.find({userId:req.params.user_id},function(err,result) {
+    UserRecommend.find({userId: req.params.user_id}, function (err, result) {
         if (err) {
             console.log(err);
             res.render('recommendUsers', {
                 result: null,
-                errMsg: "No recommend user found for this user"
+                foundUser: null
             })
         }
         else {
-            console.log("result: " + result);
-            var rec1 = result[0].recommendId;
-            var rec2 = result[1].recommendId;
-            var rec3 = result[2].recommendId;
+            if (result.length == 0) {
+                res.render('recommendUsers', {
+                    result: null,
+                    foundUser: null
+                });
+            }
+            else {
+                console.log("result: " + result);
+                var rec1 = result[0].recommendId;
+                var rec2 = result[1].recommendId;
+                var rec3 = result[2].recommendId;
+                User.find({'$or': [{userId: rec1}, {userId: rec2}, {userId: rec3}]}, function (err, foundUser) {
+                    if (err) {
+                        console.log(err);
+                        res.render('recommendUsers', {
+                            foundUser: null,
+                            result : null
+                        })
+                    }
+                    else {
+                        console.log("Recommend users: " + foundUser);
+                        res.render('recommendUsers', {
+                            foundUser: foundUser,
+                            result: result
+                        })
+                    }
+                });
+            }
         }
-        User.find({'$or':[{userId:rec1},{userId:rec2},{userId:rec3}]},function(err,foundUser) {
-            if (err) {
-                console.log(err);
-                res.render('recommendUsers', {
-                    foundUser: null,
-                    errMsg: "No recommend user found for this user"
-                })
-            }
-            else{
-                console.log("Recommend users: " + foundUser);
-                res.render('recommendUsers', {
-                    foundUser: foundUser,
-                    errMsg: null
-                })
-            }
-        });
     });
 });
 
