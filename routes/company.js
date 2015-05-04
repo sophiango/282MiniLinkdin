@@ -403,7 +403,8 @@ router.get('/:comp_id/job', function (req, res) {
         if (err ){ console.log("Error" + err);}
         else {
             console.log('Found company: ' + foundJob );
-            res.render('viewPostedJobs',{jobList:foundJob,companyId:comp_id} );
+            console.log("comp" + comp_id);
+            res.render('viewPostedJobs',{jobList:foundJob,companyId:comp_id,comp_id:comp_id} );
         }
     });
 });

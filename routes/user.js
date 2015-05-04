@@ -267,32 +267,36 @@ router.get('/:user_id/recommendJob',function(req,res){
         if (err) {
             console.log(err);
             res.render('recommendJobs', {
-                result: null,
-                errMsg: "No recommend user found for this user"
+                result: null
             })
         }
         else {
-            console.log("result: " + result);
-            var rec1 = result[0].jobId;
-            var rec2 = result[1].jobId;
-            var rec3 = result[2].jobId;
+            if (result.length==0){
+                res.render('recommendJobs', {
+                    result: null
+                })
+            }
+            else {
+                console.log("result: " + result);
+                var rec1 = result[0].jobId;
+                var rec2 = result[1].jobId;
+                var rec3 = result[2].jobId;
 
-            Job.find({'$or':[{jobId:rec1},{jobId:rec2},{jobId:rec3}]},function(err,jobList) {
-                if (err) {
-                    console.log(err);
-                    res.render('recommendUsers', {
-                        jobList: null,
-                        errMsg: "No recommend user found for this user"
-                    })
-                }
-                else{
-                    console.log("Recommend jobs: " + jobList);
-                    res.render('recommendJobs', {
-                        jobList: jobList,
-                        errMsg: null
-                    })
-                }
-            });
+                Job.find({'$or': [{jobId: rec1}, {jobId: rec2}, {jobId: rec3}]}, function (err, jobList) {
+                    if (err) {
+                        console.log(err);
+                        res.render('recommendUsers', {
+                            jobList: null
+                        })
+                    }
+                    else {
+                        console.log("Recommend jobs: " + jobList);
+                        res.render('recommendJobs', {
+                            jobList: jobList
+                        })
+                    }
+                });
+            }
         }
     });
     //User.findOne({userId:req.params.user_id},function(err,foundUser) {

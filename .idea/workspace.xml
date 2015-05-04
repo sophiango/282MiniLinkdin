@@ -26,6 +26,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="company.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/company.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.5925925" vertical-offset="5738" max-vertical-offset="8790">
+              <caret line="389" column="5" selection-start-line="389" selection-start-column="5" selection-end-line="389" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jobApplication.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/jobApplication.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.592592" vertical-offset="638" max-vertical-offset="2820">
+              <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchJobs.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/searchJobs.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.375" vertical-offset="135" max-vertical-offset="1350">
+              <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="company_navbar.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/company_navbar.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.1764708" vertical-offset="27" max-vertical-offset="1260">
+              <caret line="16" column="86" selection-start-line="16" selection-start-column="79" selection-end-line="16" selection-end-column="86" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -36,34 +76,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="career_path.ejs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/career_path.ejs">
+      <file leaf-file-name="recommendJobs.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/recommendJobs.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6005917" vertical-offset="1462" max-vertical-offset="4170">
-              <caret line="111" column="32" selection-start-line="111" selection-start-column="32" selection-end-line="111" selection-end-column="32" />
-              <folding>
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.375" vertical-offset="132" max-vertical-offset="540">
-              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+            <state vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="1335">
+              <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.0" vertical-offset="5799" max-vertical-offset="14430">
-              <caret line="401" column="21" selection-start-line="401" selection-start-column="21" selection-end-line="401" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.7643979" vertical-offset="4118" max-vertical-offset="14490">
+              <caret line="294" column="44" selection-start-line="294" selection-start-column="44" selection-end-line="294" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="career_path.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/career_path.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="8.416667" vertical-offset="1912" max-vertical-offset="4170">
+              <caret line="114" column="86" selection-start-line="114" selection-start-column="86" selection-end-line="114" selection-end-column="86" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="job.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/job.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+              <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -81,16 +128,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/views/error.ejs" />
-        <option value="$PROJECT_DIR$/views/content.ejs" />
-        <option value="$PROJECT_DIR$/views/navbar.ejs" />
         <option value="$PROJECT_DIR$/views/header.ejs" />
         <option value="$PROJECT_DIR$/views/form.ejs" />
         <option value="$PROJECT_DIR$/views/add_company.ejs" />
         <option value="$PROJECT_DIR$/views/edit_education.ejs" />
         <option value="$PROJECT_DIR$/views/edit_user.ejs" />
         <option value="$PROJECT_DIR$/views/edit_edu.ejs" />
-        <option value="$PROJECT_DIR$/models/job.js" />
         <option value="$PROJECT_DIR$/views/dashboard.ejs" />
         <option value="$PROJECT_DIR$/views/edit_exp.ejs" />
         <option value="$PROJECT_DIR$/views/add_new_exp.ejs" />
@@ -107,16 +150,13 @@
         <option value="$PROJECT_DIR$/views/add_skill.ejs" />
         <option value="$PROJECT_DIR$/views/user.ejs" />
         <option value="$PROJECT_DIR$/routes/staticId.js" />
-        <option value="$PROJECT_DIR$/views/recommendJobs.ejs" />
         <option value="$PROJECT_DIR$/views/user_home.ejs" />
         <option value="$PROJECT_DIR$/models/LookupJob.js" />
         <option value="$PROJECT_DIR$/views/recommendUsers.ejs" />
         <option value="$PROJECT_DIR$/views/profile_navbar.ejs" />
         <option value="$PROJECT_DIR$/views/company_home.ejs" />
-        <option value="$PROJECT_DIR$/views/company_navbar.ejs" />
         <option value="$PROJECT_DIR$/models/CandidateRecommend.js" />
         <option value="$PROJECT_DIR$/views/company.ejs" />
-        <option value="$PROJECT_DIR$/routes/company.js" />
         <option value="$PROJECT_DIR$/views/similarCandidate.ejs" />
         <option value="$PROJECT_DIR$/models/CareerRecommend.js" />
         <option value="$PROJECT_DIR$/views/recommendCandidate.ejs" />
@@ -130,8 +170,15 @@
         <option value="$PROJECT_DIR$/bin/www" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/routes/user.js" />
         <option value="$PROJECT_DIR$/views/career_path.ejs" />
+        <option value="$PROJECT_DIR$/models/job.js" />
+        <option value="$PROJECT_DIR$/views/viewPostedJobs.ejs" />
+        <option value="$PROJECT_DIR$/views/company_navbar.ejs" />
+        <option value="$PROJECT_DIR$/routes/company.js" />
+        <option value="$PROJECT_DIR$/routes/jobApplication.js" />
+        <option value="$PROJECT_DIR$/views/searchJobs.ejs" />
+        <option value="$PROJECT_DIR$/views/recommendJobs.ejs" />
+        <option value="$PROJECT_DIR$/routes/user.js" />
       </list>
     </option>
   </component>
@@ -640,12 +687,12 @@
       <workItem from="1428256258780" duration="29210000" />
       <workItem from="1428348156617" duration="69798000" />
       <workItem from="1428544754206" duration="37000" />
-      <workItem from="1430527992651" duration="49508000" />
+      <workItem from="1430527992651" duration="53366000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166537000" />
+    <option name="totallyTimeSpent" value="170395000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="153" y="23" width="1116" height="715" extended-state="0" />
@@ -672,7 +719,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22905028" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3739968" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29855537" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -787,14 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/viewPostedJobs.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.62347186" vertical-offset="255" max-vertical-offset="1380">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/companyJob.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5496536" vertical-offset="212" max-vertical-offset="645">
@@ -859,42 +898,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/searchJobs.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="37.75" vertical-offset="906" max-vertical-offset="1350">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/LookupJob.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2631579" vertical-offset="0" max-vertical-offset="399">
           <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/JobApplication.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1155">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/recommendJobs.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625" vertical-offset="105" max-vertical-offset="1350">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/searchUser.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33118972" vertical-offset="227" max-vertical-offset="1005">
-          <caret line="22" column="40" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -955,14 +962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/company.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59016395" vertical-offset="7839" max-vertical-offset="8775">
-          <caret line="537" column="105" selection-start-line="537" selection-start-column="105" selection-end-line="537" selection-end-column="105" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/CareerRecommend.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
@@ -974,14 +973,6 @@
     <entry file="file://$PROJECT_DIR$/database/mysqlSeqlite.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/job.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="406">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1091,18 +1082,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.0" vertical-offset="5799" max-vertical-offset="14430">
-          <caret line="401" column="21" selection-start-line="401" selection-start-column="21" selection-end-line="401" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.375" vertical-offset="132" max-vertical-offset="540">
           <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/JobApplication.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3618582" vertical-offset="148" max-vertical-offset="1155">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/job.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/company.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.5925925" vertical-offset="5738" max-vertical-offset="8790">
+          <caret line="389" column="5" selection-start-line="389" selection-start-column="5" selection-end-line="389" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/viewPostedJobs.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54469275" vertical-offset="45" max-vertical-offset="1380">
+          <caret line="16" column="85" selection-start-line="16" selection-start-column="76" selection-end-line="16" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/company_navbar.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.1764708" vertical-offset="27" max-vertical-offset="1260">
+          <caret line="16" column="86" selection-start-line="16" selection-start-column="79" selection-end-line="16" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/searchUser.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42337662" vertical-offset="227" max-vertical-offset="1005">
+          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -1115,14 +1146,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/jobApplication.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.592592" vertical-offset="638" max-vertical-offset="2820">
+          <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/searchJobs.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.375" vertical-offset="135" max-vertical-offset="1350">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/career_path.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6005917" vertical-offset="1462" max-vertical-offset="4170">
-          <caret line="111" column="32" selection-start-line="111" selection-start-column="32" selection-end-line="111" selection-end-column="32" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="8.416667" vertical-offset="1912" max-vertical-offset="4170">
+          <caret line="114" column="86" selection-start-line="114" selection-start-column="86" selection-end-line="114" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/recommendJobs.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="1335">
+          <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7643979" vertical-offset="4118" max-vertical-offset="14490">
+          <caret line="294" column="44" selection-start-line="294" selection-start-column="44" selection-end-line="294" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>

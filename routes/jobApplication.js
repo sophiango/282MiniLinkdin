@@ -32,7 +32,7 @@ app.use(session({
 function getJobDataSeries(obj,callback){
 	console.log(obj.jobId + " "+obj.companyId);
 	
-	Job.findOne({jobId:obj.jobId,companyId:obj.companyId},function(err,foundJob){
+	Job.findOne({jobId:obj.jobId},function(err,foundJob){
         if (err){ console.log(err);
         return callback(foundJob);}
         else {
@@ -53,7 +53,7 @@ router.post('/', function(req, res, next) {
 	var result = req.body.jobId.split(" ");
 	console.log(result[0]+" "+result[1]);
 	var userId = req.session.MyID; // mySesn here is number
-	userId.toString(); // optional
+	//userId.toString(); // optional
 	// model.userId=req.body.userId;
 	var jobApplication = model.JobApplication.build({
 		userId : userId,
