@@ -267,13 +267,13 @@ router.get('/:user_id/recommendJob',function(req,res){
         if (err) {
             console.log(err);
             res.render('recommendJobs', {
-                result: null
+                jobList: null
             })
         }
         else {
             if (result.length==0){
                 res.render('recommendJobs', {
-                    result: null
+                    jobList: null
                 })
             }
             else {
